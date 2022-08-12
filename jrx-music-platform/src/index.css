@@ -11,3 +11,58 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.home{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18%;
+}
+.logo-spotify{
+  width: 20%;
+  color: #fff;
+}
+img{
+  height: 5vh;
+  /* margin-bottom: 5rem; */
+}
+button {
+  padding: 0.2rem 1rem;
+  border-radius: 5rem;
+  background-color: #fff;
+  color: #49BEFF;
+  font-size: 1.4rem;
+  cursor: pointer;
+}
+.title{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.nav-bar{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+.nav-bar button{
+  margin-left: 20px;
+}
+.artist{
+  display: flex;
+  flex-direction: column;
+}
+.menu{
+  background-color: #515151;
+  color: #fff;
+  padding: 4% 0 ;
+}
+.menu ul{
+  list-style: none;
+}
+.menu ul a{
+  color: #fff;
+  text-decoration: none;
+  height: 100%;
+}
