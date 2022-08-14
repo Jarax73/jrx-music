@@ -92,7 +92,7 @@ export default function Login() {
             }
             {console.log(artists)}
             
-            {!token ? null : renderArtists() }
+            {renderArtists() }
 
         </Container>
    )
