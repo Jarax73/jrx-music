@@ -6,10 +6,11 @@ import Aside from './components/Aside';
 
 export default function App() {
   const clientID = "af6fe4b7a75e4651bd1531de3f541e53";
-    const redirectUrl = "http://localhost:3000/";
-    const apiUrl = "http://accounts.spotify.com/authorize";
+    const redirectUrl = "http://localhost:3000";
+    const apiUrl = "https://accounts.spotify.com/authorize";
     const responseType = "token";
     const scope = [
+        "streaming",
         "user-read-email", 
         "user-read-private", 
         "user-modify-playback-state",
@@ -37,16 +38,20 @@ export default function App() {
         setToken(token);
     }, []);
     const handleClick = () => {
-        window.location.href = `${apiUrl}?client_id=${clientID}&redirect_uri=${redirectUrl}&scope=${scope.join(" ")}
-        &response_type=${responseType}&show_dialog=true`;
+        window.location.href = `${apiUrl}?client_id=${clientID}&redirect_uri=${redirectUrl}&scope=${scope.join(" ")}&response_type=${responseType}&show_dialog=true`;
         };
     const logout = () => {
         setToken(null);
         window.localStorage.removeItem("token");
     }
 
+    
     const searchArtists = async (e) => {
         e.preventDefault();
+
+        // const {dataa} = await axios.get("https://api.spotify.com/v1/artists/")
+        // console.log(dataa.artists); 
+
         const {data} = await axios.get("https://api.spotify.com/v1/search", {
             headers: {
                 Authorization: `Bearer ${token}`

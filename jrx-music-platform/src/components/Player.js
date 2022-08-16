@@ -1,10 +1,4 @@
-// import React from 'react';
-// import { WebPlaybackSDK } from "react-spotify-web-playback-sdk";
-
-// export default function MySpotifyPlayer() {
-    
-//   };
-
+import { WebPlaybackSDK } from "react-spotify-web-playback-sdk";
 import React, { useState, useEffect } from "react";
 import SpotifyPlayer from "react-spotify-web-playback";
 
