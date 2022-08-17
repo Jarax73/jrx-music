@@ -2,14 +2,16 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
-import { StateProvider } from './apis/StateProvider';
-import reducer, {initialState} from './apis/reducer';
+import { SpotifyApiContext, SpotifyApiAxiosContext } from "react-spotify-api";
+// import { StateProvider } from './components/Artist/Artist';
+// import reducer, {initialState} from './apis/reducer';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
-    <StateProvider initialState={initialState} reducer={reducer} />
-    <App />
-  </React.StrictMode>
+    <SpotifyApiAxiosContext.Provider >
+    <SpotifyApiContext.Provider >
+      <App />
+    </SpotifyApiContext.Provider>
+    </SpotifyApiAxiosContext.Provider>
 );
 

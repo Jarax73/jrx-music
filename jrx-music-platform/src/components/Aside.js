@@ -27,7 +27,7 @@ export default function Aside({token, redirectUrl}) {
                 <p>Beat it - Michael Jackson</p>
             </div>
         </div>
-        <Player token={token} redirectUrl={redirectUrl}/>
+        <Player token={token} />
     </div>
   )
 }

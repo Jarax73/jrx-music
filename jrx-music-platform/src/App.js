@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import axios from "axios";
 import Menu from './components/Menu';
 import Aside from './components/Aside';
+import {RiSearch2Line} from 'react-icons/ri';
 
 
 export default function App() {
@@ -18,7 +19,9 @@ export default function App() {
         "user-read-currently-playing",
         "user-read-recently-played",
         "user-read-playback-position",
-        "user-top-read"
+        "user-top-read",
+        "user-library-read",
+        "user-library-modify"
     ];
     const [token, setToken] = useState ("");
     const [searchKey, setSearchKey] = useState ("");
@@ -65,6 +68,16 @@ export default function App() {
         setArtists(data.artists.items);
         console.log(data.artists.items);
         
+        const {singer} = await axios.get(
+        'https://api.spotify.com/v1/me/playlists', {
+            params: { limit: 50, offset: 0 },
+            headers: {
+                Accept: 'application/json',
+                Authorization: 'Bearer ' + token,
+                'Content-Type': 'application/json',
+            },
+        })
+        console.log(singer);
     }
     console.log(artists);
     const renderArtists = () => {
@@ -91,11 +104,13 @@ export default function App() {
         </div>
             : <React.Fragment>
           <Menu logout={logout}/>
-          <div className="body">
+          <div className="section">
             <div className="row">           
-              <form className="search" onSubmit={searchArtists}>
-                  <input type="text" onChange={e => setSearchKey(e.target.value)}/>
-                  <button type="submit">Search</button>
+              <form className="search" onSubmit={searchArtists}>                  
+                  <button className="searchArtists" type="submit">
+                    <input type="text" onChange={e => setSearchKey(e.target.value)}/>
+                    <RiSearch2Line/>
+                  </button>
               </form>
             </div>
             <div className="render-artists">
@@ -108,12 +123,3 @@ export default function App() {
     </div>
   )
 }
-
-
-//   return (
-//     <div className='main'>
-//       <Menu />
-//       <Login />
-//     </div>
-//   )
-// }
