@@ -1,17 +1,36 @@
 import { WebPlaybackSDK } from "react-spotify-web-playback-sdk";
 import React, { useState, useEffect } from "react";
 import SpotifyPlayer from "react-spotify-web-playback";
+import axios from "axios";
 
-const Player = ({ token, searchTracks}) => {
-  console.log(searchTracks);
+const Player = ({ token}) => {
+  const [url, setUrl] = useState("");
+
     console.log(token);
   const [play, setPlay] = useState(false);
-  const redirectUrl = "spotify:playlist:37i9dQZF1DXdTBzNcDowKf";
+  
   const initialVolume = 20;
 
   useEffect(() => {
     setPlay(true)
-  }, [redirectUrl])
+    window.onload = searchTracks();
+  }, [url])
+
+  console.log(url);
+
+  const searchTracks = async () => {
+  
+    const {data} = await axios.get('https://api.spotify.com/v1/me/player/recently-played?', {
+        headers: {
+            Accept: "application/json",
+            'Content-type': "application/json",
+            Authorization: `Bearer ${token}`
+        }
+    })
+    console.log(data.items);
+    setUrl(data.items.map(item=> item.track.uri));
+  }
+  
 
   if (!token) return null
   return (
@@ -22,13 +41,13 @@ const Player = ({ token, searchTracks}) => {
         callback={state => !state.isPlaying && setPlay(false)}
         initialVolume={initialVolume}
         play={play}
-        uris={redirectUrl ? redirectUrl : []}
+        uris={url ? url : []}
         styles={{
           activeColor: "#fff",
-          bgColor: "#2679a7",
+          bgColor: "#05476b",
           color: "#fff",
           loaderColor: "#fff",
-          sliderColor: "#05476b",
+          sliderColor: "#515151",
           trackArtistColor: "#CFC5C5",
           trackNameColor: "#fff",
         }}

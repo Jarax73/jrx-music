@@ -27,7 +27,7 @@ export default function App() {
     const [token, setToken] = useState ("");
     const [searchKey, setSearchKey] = useState ("");
     const [artists, setArtists] = useState ("");
-    const [tracks, setTracks] = useState ("");
+    const [url, setUrl] = useState ("");
     
     useEffect(() => {
         const hash = window.location.hash;
@@ -69,7 +69,19 @@ export default function App() {
         setArtists(data.artists.items);
         console.log(data.artists.items);
     }
-    
+    // const searchTracks = async (e) => {
+    //     e.preventDefault();
+
+    //     const {data} = await  axios.get('https://api.spotify.com/v1/me/player/recently-played?limit=10', {
+    //         headers: {
+    //             Accept: "application/json",
+    //             'Content-type': "application/json",
+    //             Authorization: `Bearer ${token}`
+    //         }
+    //     })
+    //     console.log(data.items);
+    //     setUrl(data);
+    //   }
 
     console.log(artists);
     const renderArtists = () => {
