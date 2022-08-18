@@ -21,7 +21,7 @@ code {
   justify-content:space-between;
   margin: auto;
   height: 99vh;
-  width: 99%;
+  width: 99vw;
   background-color:#2679a7;  
 }
 .main{
@@ -80,28 +80,36 @@ button {
 .searchArtists{
   display: flex;
   align-items: center;
+  border: none;
 }
 .search input{
   border: none;
+  color: #05476b;
 }
 .search input:focus{
-  /* border: none; */
   outline: none;
 }
 .artist{
   display: flex;
   flex-direction: column;
-  width: 100px;
-  height: 100px;
+  width: 15%;
+  height: ;
   margin: 5%;
+  border-radius: 10px;
+  background-color: #05476b;
 }
 .artist img{
-  
+  border-radius: 10px;
   width: 100%;
+  margin-bottom: 10px;
   height: 80px;
 }
+.artist-detail{
+  padding: 10px 7px;
+}
 .render-artists{
-  width: ;
+  width: 800px;
+  max-width: 100%;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
@@ -109,13 +117,13 @@ button {
   margin-top: 30px;
 }
 .menu{
-  width: 400px;
+  width: 30%;
   height: 99vh;
   background-color: #515151;
   color: #fff;
   margin: 0;
   border-radius: 15px 0px 0px 15px; 
-  padding: ;
+  padding: 0;
 }
 .logo{
   margin-left: 40px;
@@ -158,12 +166,22 @@ button {
   flex-direction: column;
   overflow: auto;
 }
+.player-container{
+  background-color: #2679a7;
+  border: 1px solid #2679a7;
+  border-radius: 0%;
+  padding: 0;
+  margin:0;
+  width: 800px;
+  /* min-width: 300%; */
+  max-width: 100%;
+}
 .inside-notifications{
   display: flex;
   flex-direction: column;
 }
 .aside{
-  width: 300px;
+  width:35%;
   height: 99vh;
   border-radius: 0px 15px 15px 0px ;
   background-color: #05476b;
@@ -174,11 +192,27 @@ button {
   color: #fff;
   text-decoration: none;
 }
-
+.notifications-side{
+  display: flex;
+  align-items: center;
+}
+.notify{
+  font-size: 350%;
+  margin-bottom: 20px;
+  margin-right: 10%;
+  color: #49BEFF;
+  border: 1px solid #2679a7;
+  border-radius: 20%;
+  background-color: #2679a7;
+  padding: 5px;
+}
+.notify-container{
+  margin-right: 5%;
+}
 .logout{
   display: flex;
   align-items: center;
   cursor: pointer;
   margin-left: 40px;
-  margin-top: 100%;
+  margin-top: 70%;
 }

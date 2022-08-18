@@ -1,33 +1,34 @@
 import React from 'react';
-import Player from '../components/Player';
+import {RiPlayCircleFill} from 'react-icons/ri';
+import {IoMusicalNotesSharp} from 'react-icons/io5';
 
-export default function Aside({token, redirectUrl}) {
+export default function Aside({token}) {
     console.log(token);
   return (
     <div className="aside">
         <h2>Notifications</h2>
         <div className="notifications-side">
-            <img src=""/>
+            <div className="notify-container"><RiPlayCircleFill className="notify"/></div>
             <div className="inside-notifications">
                 <a href="#">Playlist Added</a>
                 <p>200 songs</p>
             </div>
         </div>
         <div className="notifications-side">
-            <img src=""/>
+            <div className="notify-container"><RiPlayCircleFill className="notify"/></div>
             <div className="inside-notifications">
                 <a href="#">Playlist Shared</a>
                 <p>To 8 users</p>
             </div>
         </div>
         <div className="notifications-side">
-            <img src=""/>
-            <div className="inside-notifications">
+            <div className="notify-container"><IoMusicalNotesSharp className="notify"/></div>
+            <div className="inside-notifications">                
                 <a href="#">New Music</a>
                 <p>Beat it - Michael Jackson</p>
             </div>
         </div>
-        <Player token={token} />
+        
     </div>
   )
 }

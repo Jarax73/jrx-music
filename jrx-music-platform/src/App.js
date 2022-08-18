@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import axios from "axios";
 import Menu from './components/Menu';
+import Player from './components/Player';
 import Aside from './components/Aside';
 import {RiSearch2Line} from 'react-icons/ri';
 
@@ -26,6 +27,7 @@ export default function App() {
     const [token, setToken] = useState ("");
     const [searchKey, setSearchKey] = useState ("");
     const [artists, setArtists] = useState ("");
+    const [tracks, setTracks] = useState ("");
     
     useEffect(() => {
         const hash = window.location.hash;
@@ -40,9 +42,11 @@ export default function App() {
         }
         setToken(token);
     }, []);
+
     const handleClick = () => {
         window.location.href = `${apiUrl}?client_id=${clientID}&redirect_uri=${redirectUrl}&scope=${scope.join(" ")}&response_type=${responseType}&show_dialog=true`;
         };
+        
     const logout = () => {
         setToken(null);
         window.localStorage.removeItem("token");
@@ -51,9 +55,6 @@ export default function App() {
     
     const searchArtists = async (e) => {
         e.preventDefault();
-
-        // const {dataa} = await axios.get("https://api.spotify.com/v1/artists/")
-        // console.log(dataa.artists); 
 
         const {data} = await axios.get("https://api.spotify.com/v1/search", {
             headers: {
@@ -67,25 +68,18 @@ export default function App() {
         
         setArtists(data.artists.items);
         console.log(data.artists.items);
-        
-        const {singer} = await axios.get(
-        'https://api.spotify.com/v1/me/playlists', {
-            params: { limit: 50, offset: 0 },
-            headers: {
-                Accept: 'application/json',
-                Authorization: 'Bearer ' + token,
-                'Content-Type': 'application/json',
-            },
-        })
-        console.log(singer);
     }
+    
+
     console.log(artists);
     const renderArtists = () => {
         return artists === "" ? null : artists.map(artist => (
-            <div className="artist" key={artist.id}><a href={artist.uri}>
+            <div className="artist" key={artist.id}>
                 {artist.images.length ? <img width={"100%"} height={"100%"} src={artist.images[0].url} alt="" /> : <div>No image</div>}
-                {artist.name}<br/>
-                {artist.genres[0]}</a>
+                <div className="artist-detail">
+                    {artist.name}<br/>
+                    {artist.genres[0]}
+                </div>
             </div>
             )
         )
@@ -104,19 +98,23 @@ export default function App() {
         </div>
             : <React.Fragment>
           <Menu logout={logout}/>
+          <div style={{display: 'flex', flexDirection: 'column'}}>
           <div className="section">
             <div className="row">           
               <form className="search" onSubmit={searchArtists}>                  
                   <button className="searchArtists" type="submit">
                     <input type="text" onChange={e => setSearchKey(e.target.value)}/>
-                    <RiSearch2Line/>
+                    <RiSearch2Line style={{color: '#05476b'}} />
                   </button>
               </form>
             </div>
             <div className="render-artists">
               {renderArtists() }
             </div>
+            
           </div>
+                <Player token={token} />
+            </div>
             <Aside token={token} redirectUrl={redirectUrl}/>
             </React.Fragment>
         }
