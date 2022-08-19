@@ -17,6 +17,7 @@
     "react-spotify-web-playback-sdk": "^3.0.1",
     "spotify-web-api-js": "^1.5.2",
     "styled-components": "^5.3.5",
+    "underscore": "^1.13.4",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
