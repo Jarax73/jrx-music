@@ -15,6 +15,7 @@
     "react-spotify-api": "^3.0.0",
     "react-spotify-web-playback": "^0.10.0",
     "react-spotify-web-playback-sdk": "^3.0.1",
+    "spotify": "^0.3.0",
     "spotify-web-api-js": "^1.5.2",
     "styled-components": "^5.3.5",
     "web-vitals": "^2.1.4"

@@ -13,22 +13,24 @@ const Player = ({ token}) => {
 
   useEffect(() => {
     setPlay(true)
-    window.onload = searchTracks();
+    searchTracks();
   }, [url])
 
   console.log(url);
 
   const searchTracks = async () => {
   
-    const {data} = await axios.get('https://api.spotify.com/v1/me/player/recently-played?', {
-        headers: {
-            Accept: "application/json",
-            'Content-type': "application/json",
-            Authorization: `Bearer ${token}`
-        }
-    })
-    console.log(data.items);
-    setUrl(data.items.map(item=> item.track.uri));
+    // const {data} = await axios.get('https://api.spotify.com/v1/browse/new-releases?limit=10', {
+    //     headers: {
+    //         Accept: "application/json",
+    //         'Content-type': "application/json",
+    //         Authorization: `Bearer ${token}`
+    //     }
+    // })
+    // setUrl(data.items.map(item=> item.track.uri));
+    // setUrl(data.albums.items[0].uri);
+    // console.log(data.albums.items[0].uri);
+    // console.log(data.items.map(item=> item.track.uri));
   }
   
 

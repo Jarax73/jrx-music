@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {RiPlayCircleFill} from 'react-icons/ri';
 import {IoMusicalNotesSharp} from 'react-icons/io5';
 
 export default function Aside({token}) {
-    console.log(token);
+    useEffect(() => {
+        console.log(token);
+    }, [])
   return (
     <div className="aside">
         <h2>Notifications</h2>
