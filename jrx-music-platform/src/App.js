@@ -29,6 +29,7 @@ export default function App() {
     const [token, setToken] = useState('');
     const [recent, setRecent] = useState('');
     const [url, setUrl] = useState('');
+    const keyProp = new Date().getSeconds();
 
     useEffect(() => {
         const hash = window.location.hash;
@@ -85,7 +86,7 @@ export default function App() {
                 .map((item) => (
                     <div
                         className="artist"
-                        key={item.track.id}
+                        key={keyProp}
                         onClick={() => setUrl(item.track.uri)}
                         style={{
                             width: '20%',

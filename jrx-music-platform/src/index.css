@@ -76,6 +76,7 @@ button {
   top: 0;
   right: 30%;
   margin-top: 10px;
+  z-index: 2;
 }
 .searchArtists{
   display: flex;
