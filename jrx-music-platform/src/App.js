@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Login from './components/Login';
-import Menu from './components/Menu';
+import Menu from './components/Header';
 import Player from './components/Player';
 import Aside from './components/Aside';
+import Home from './components/Home';
+import Playlists from './components/Playlists';
+import Library from './components/Library';
 import SearchArtists from './components/SearchArtists';
-import { RiSearch2Line } from 'react-icons/ri';
-import { RiPlayCircleFill } from 'react-icons/ri';
+import { Routes, Route } from 'react-router-dom';
 
 export default function App() {
     const clientID = 'af6fe4b7a75e4651bd1531de3f541e53';
@@ -28,7 +30,7 @@ export default function App() {
     ];
     const [token, setToken] = useState('');
     const [recent, setRecent] = useState('');
-    const [url, setUrl] = useState('');
+    const [url, setUrl] = useState([]);
 
     useEffect(() => {
         const hash = window.location.hash;
@@ -140,22 +142,17 @@ export default function App() {
     };
 
     return (
-        <div className="container">
+        <div>
             {!token ? (
                 <Login handleClick={handleClick} />
             ) : (
                 <React.Fragment>
-                    <Menu logout={logout} />
-                    <div style={{ display: 'flex', flexDirection: 'column' }}>
-                        <div className="section">
-                            <SearchArtists />
-                            <div className="render-artists">
-                                {renderRecentPlayed()}
-                            </div>
-                        </div>
-                        <Player token={token} url={url} />
-                    </div>
-                    <Aside token={token} redirectUrl={redirectUrl} />
+                    {/* <Menu /> */}
+                    <Routes>
+                        <Route exact path="/" element={<Home />} />
+                        <Route path="/playlists" element={<Playlists />} />
+                        <Route path="/library" element={<Library />} />
+                    </Routes>
                 </React.Fragment>
             )}
         </div>
