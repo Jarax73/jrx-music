@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react';
 import axios from "axios";
-import Menu from './components/Menu';
 import Player from './components/Player';
 import Aside from './components/Aside';
 import {RiSearch2Line} from 'react-icons/ri';
@@ -109,7 +108,6 @@ export default function App() {
             <h2>Please login</h2> 
         </div>
             : <React.Fragment>
-          <Menu logout={logout}/>
           <div style={{display: 'flex', flexDirection: 'column'}}>
           <div className="section">
             <div className="row">           

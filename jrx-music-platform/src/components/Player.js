@@ -22,7 +22,8 @@ const Player = ({ token, url }) => {
                 showSaveIcon
                 callback={(state) => !state.isPlaying && setPlay(false)}
                 initialVolume={initialVolume}
-                play={play}
+                autoPlay={true}
+                // play={play}
                 uris={url}
                 styles={{
                     activeColor: '#fff',
