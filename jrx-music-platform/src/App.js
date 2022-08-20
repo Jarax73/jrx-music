@@ -50,7 +50,7 @@ export default function App() {
 
         window.onload = axios
             .get(
-                'https://api.spotify.com/v1/me/player/recently-played?limit=6',
+                'https://api.spotify.com/v1/me/player/recently-played?limit=5',
                 {
                     headers: {
                         Accept: 'application/json',
