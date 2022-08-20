@@ -1,5 +1,11 @@
 {
+<<<<<<< HEAD
     "semi": true,
     "singleQuote": true,
     "tabWidth": 2
 }
+=======
+    "tabWidth": 4,
+    "singleQuote": true
+}
+>>>>>>> feature/resources
