@@ -76,6 +76,7 @@ button {
   top: 0;
   right: 30%;
   margin-top: 10px;
+  z-index: 2;
 }
 .searchArtists{
   display: flex;
@@ -92,9 +93,9 @@ button {
 .artist{
   display: flex;
   flex-direction: column;
-  width: 15%;
+  width: 25%;
   height: ;
-  margin: 5%;
+  margin: 1%;
   border-radius: 10px;
   background-color: #05476b;
 }
@@ -102,7 +103,7 @@ button {
   border-radius: 10px;
   width: 100%;
   margin-bottom: 10px;
-  height: 80px;
+  height: 100%;
 }
 .artist-detail{
   padding: 10px 7px;
