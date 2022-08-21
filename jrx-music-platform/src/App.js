@@ -29,6 +29,7 @@ export default function App() {
     const [searchKey, setSearchKey] = useState ("");
     const [artists, setArtists] = useState ("");
     const [recentlyPlayed, setRecentlyPlayed] = useState ("");
+    const [profile, setProfile] = useState ("");
     const [url, setUrl] = useState ("");
     
     useEffect(() => {
@@ -51,8 +52,19 @@ export default function App() {
                 Authorization: `Bearer ${token}`
             }
         }).then(response => setRecentlyPlayed(response.data.items)).catch(error => console.log(error));
-    }, []);
+        
+        axios.get('https://api.spotify.com/v1/me', {
+            headers: {
+                Accept: "application/json",
+                'Content-type': "application/json",
+                Authorization: `Bearer ${token}`
+            }
+        }).then(response => setProfile(response.data)).catch(error => console.log(error));
 
+    }, []);
+    console.log(profile.email
+    );
+    console.log(profile.images);
     const handleClick = () => {
         window.location.href = `${apiUrl}?client_id=${clientID}&redirect_uri=${redirectUrl}&scope=${scope.join("%20")}&response_type=${responseType}&show_dialog=true`;
         };
@@ -97,7 +109,7 @@ export default function App() {
     const renderArtists = () => {
         return artists === "" ? null : artists.map(artist => (
             <div className="artist" key={artist.id} onClick={()=>setUrl(artist.uri)}>
-                {artist.images.length ? <img width={"100%"} height={"170px"} src={artist.images[0].url} alt="" /> : <div>No image</div>}
+                {artist.images.length ? <img src={artist.images[0].url} alt="" /> : <div>No image</div>}
                 <div className="artist-detail">
                     {artist.name}<br/>
                     {artist.genres[0]}
@@ -119,7 +131,7 @@ export default function App() {
             <h2>Please login</h2> 
         </div>
             : <React.Fragment>
-          <Menu logout={logout}/>
+          <Menu logout={logout} profile={profile}/>
           <div style={{display: 'flex', flexDirection: 'column'}}>
           <div className="section">
             <div className="row">           
