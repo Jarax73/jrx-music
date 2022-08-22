@@ -4,7 +4,7 @@ import './index.css';
 import App from './App';
 import Login from './components/Login';
 import Playlists from './components/Playlists';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 import Menu from './components/Header';
 
 const token = window.localStorage.getItem('token');
@@ -34,6 +34,8 @@ const token = window.localStorage.getItem('token');
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <React.StrictMode>
-        <App/>
+        <BrowserRouter>
+            <App/>
+        </BrowserRouter>
     </React.StrictMode>
 );

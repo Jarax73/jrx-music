@@ -3,7 +3,11 @@ import axios from "axios";
 import Menu from './components/Header';
 import Player from './components/Player';
 import Home from './components/Home';
+import Library from './components/Library';
+import Playlists from './components/Playlists';
+import Login from './components/Login';
 import Aside from './components/Aside';
+import {Routes, Route} from 'react-router-dom';
 import {RiSearch2Line} from 'react-icons/ri';
 import RecentlyPlayed from './components/RecentlyPlayed';
 import SearchArtists from './components/SearchArtists';
@@ -75,16 +79,20 @@ export default function App() {
   return (
     <div className="container">
         {!token ?
-        <div className="home">
-            <div className="title">
-            <h1>Welcome to Jrx Music by   </h1>               
-            <img src="https://storage.googleapis.com/pr-newsroom-wp/1/2018/11/Spotify_Logo_CMYK_Black.png" alt="spotify" />
-            </div>
-            <button onClick={handleClick}>Connect Spotify</button>
-            <h2>Please login</h2> 
-        </div>
+        <Login handleClick={handleClick}/>
             : 
-            <Home token={token} logout={logout} profile={profile} setUrl={setUrl} url={url} />
+            <React.Fragment>
+            <Menu logout={logout} profile={profile}/>
+                <div style={{display: 'flex', flexDirection: 'column'}}>
+                <Routes>
+                    <Route exact path="/" element={<Home token={token} logout={logout} profile={profile} setUrl={setUrl} url={url} />}/>
+                    <Route path="/Library" element={<Library />}/>
+                    <Route path="/Playlists" element={<Playlists />}/>
+                </Routes>
+                <Player token={token} url={url}/>
+                </div>
+                <Aside/>
+            </React.Fragment>
         }
     </div>
   )

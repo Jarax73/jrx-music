@@ -21,8 +21,8 @@ code {
   justify-content:space-between;
   margin: auto;
   height: 99vh;
-  width: 100%;
-  min-width: 100%;
+  width: 99vw;
+  /* min-width: 100%; */
   background-color:#2679a7;  
 }
 .main{
@@ -110,14 +110,25 @@ button {
   padding: 10px 7px;
 }
 .render-artists{
-  width: 800px;
-  max-width: 100%;
+  width: 100%;
+  max-width: 60vw;
   display: flex;
   gap: 0;
   flex-wrap: wrap;
   justify-content: space-around;
   align-items: space-between;
   margin-top: 30px;
+}
+.play{
+  margin-right: 10px;
+  font-size: 50px;
+  color: #2679a7;
+  cursor: pointer;
+}
+.artist-played{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 .menu{
   width: 30%;
@@ -176,7 +187,7 @@ button {
   padding: 0;
   margin:0;
   width: 100%;
-  /* max-width: 100%; */
+  min-width: 60vw;
 }
 .inside-notifications{
   display: flex;

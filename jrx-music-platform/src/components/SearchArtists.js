@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { RiSearch2Line } from 'react-icons/ri';
 import axios from 'axios';
+import {RiPlayCircleFill} from 'react-icons/ri';
 
 export default function SearchArtists({ token, setUrl }) {
     const [searchKey, setSearchKey] = useState('');
@@ -27,14 +28,19 @@ export default function SearchArtists({ token, setUrl }) {
     
     const renderArtists = () => {
         return <div>
-            <h2 style={{marginLeft: '5%'}}>Search Results</h2>
+            <h2 style={{width: '54vw', maxWidth: '60vw'}}>Search Results</h2>
             <div className="render-artists">
         {artists === "" ? <div>...</div> : artists.map(artist => (
-            <div className="artist" key={artist.id} onClick={()=>setUrl(artist.uri)}>
+            <div className="artist" key={artist.id}>
                 {artist.images.length ? <img src={artist.images[0].url} alt="" /> : <div>No image</div>}
-                <div className="artist-detail">
-                    {artist.name}<br/>
-                    {artist.genres[0]}
+                <div className='artist-played'>
+                    <div className="artist-detail">
+                        {artist.name}<br/>
+                        {artist.genres[0]}
+                    </div>
+                    <div className='play' onClick={()=>{setUrl(played.track.uri)}}>                        
+                        <RiPlayCircleFill/>
+                    </div>
                 </div>
             </div>
             )

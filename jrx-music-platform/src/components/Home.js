@@ -9,15 +9,15 @@ export default function Home({ token, logout, profile, setUrl, url }) {
     
     return (
         <React.Fragment>
-            <Menu logout={logout} profile={profile}/>
-            <div style={{display: 'flex', flexDirection: 'column'}}>
+            
+            {/* <div style={{display: 'flex', flexDirection: 'column'}}> */}
                 <div className="section">
                     <SearchArtists token={token} setUrl={setUrl} />
                     <RecentlyPlayed token={token} setUrl={setUrl} />
                 </div>
-            <Player token={token} url={url}/>
-            </div>
-            <Aside/>
+            {/* <Player token={token} url={url}/> */}
+            {/* </div> */}
+            
         </React.Fragment>
     );
 }

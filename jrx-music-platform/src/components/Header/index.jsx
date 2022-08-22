@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { RiHome2Fill } from 'react-icons/ri';
 import { RiPlayList2Fill } from 'react-icons/ri';
 import { RiMusic2Fill } from 'react-icons/ri';
@@ -7,7 +7,6 @@ import Profile from '../Profile';
 
 export default function Menu({ logout, profile }) {
     return (
-        <BrowserRouter>
             <div className="menu">
                 <p className="logo">Jrx Music</p>
                 <ul>
@@ -46,6 +45,5 @@ export default function Menu({ logout, profile }) {
                     <span>Log Out </span>
                 </div>
             </div>
-        </BrowserRouter>
     );
 }
