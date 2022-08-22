@@ -21,7 +21,8 @@ code {
   justify-content:space-between;
   margin: auto;
   height: 99vh;
-  width: 99vw;
+  width: 100%;
+  min-width: 100%;
   background-color:#2679a7;  
 }
 .main{
@@ -174,9 +175,8 @@ button {
   border-radius: 0%;
   padding: 0;
   margin:0;
-  width: 800px;
-  /* min-width: 300%; */
-  max-width: 100%;
+  width: 100%;
+  /* max-width: 100%; */
 }
 .inside-notifications{
   display: flex;

@@ -22,11 +22,16 @@ export default function SearchArtists({ token, setUrl }) {
         
         setArtists(data.artists.items);
     }
+
     console.log(artists);
+    
     const renderArtists = () => {
-        return artists === "" ? 'Search' : artists.map(artist => (
-            <div className="artist" key={artist.id} onClick={setUrl(artist.uri)}>
-                {artist.images.length ? <img width={"100%"} height={"100%"} src={artist.images[0].url} alt="" /> : <div>No image</div>}
+        return <div>
+            <h2 style={{marginLeft: '5%'}}>Search Results</h2>
+            <div className="render-artists">
+        {artists === "" ? <div>...</div> : artists.map(artist => (
+            <div className="artist" key={artist.id} onClick={()=>setUrl(artist.uri)}>
+                {artist.images.length ? <img src={artist.images[0].url} alt="" /> : <div>No image</div>}
                 <div className="artist-detail">
                     {artist.name}<br/>
                     {artist.genres[0]}
@@ -35,10 +40,13 @@ export default function SearchArtists({ token, setUrl }) {
             )
         )
     }
+        </div>
+    </div>
+    }
     
 
     return (
-        <div className="section">
+        <div>
             <div className="row">
                 <form className="search" onSubmit={searchArtists}>
                     <button className="searchArtists" type="submit">

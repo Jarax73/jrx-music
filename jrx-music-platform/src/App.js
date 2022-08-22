@@ -2,9 +2,11 @@ import React, {useEffect, useState} from 'react';
 import axios from "axios";
 import Menu from './components/Header';
 import Player from './components/Player';
+import Home from './components/Home';
 import Aside from './components/Aside';
 import {RiSearch2Line} from 'react-icons/ri';
 import RecentlyPlayed from './components/RecentlyPlayed';
+import SearchArtists from './components/SearchArtists';
 
 
 export default function App() {
@@ -26,10 +28,8 @@ export default function App() {
         "user-library-modify"
     ];
     const [token, setToken] = useState ("");
-    const [searchKey, setSearchKey] = useState ("");
-    const [artists, setArtists] = useState ("");
-    const [recentlyPlayed, setRecentlyPlayed] = useState ("");
     const [profile, setProfile] = useState ("");
+    const [playlists, setPlaylists] = useState ("");
     const [url, setUrl] = useState ("");
     
     useEffect(() => {
@@ -44,14 +44,6 @@ export default function App() {
             console.log(localStorage);
         }
         setToken(token);
-
-        axios.get('https://api.spotify.com/v1/me/player/recently-played?limit=10', {
-            headers: {
-                Accept: "application/json",
-                'Content-type': "application/json",
-                Authorization: `Bearer ${token}`
-            }
-        }).then(response => setRecentlyPlayed(response.data.items)).catch(error => console.log(error));
         
         axios.get('https://api.spotify.com/v1/me', {
             headers: {
@@ -61,10 +53,16 @@ export default function App() {
             }
         }).then(response => setProfile(response.data)).catch(error => console.log(error));
 
+        // axios.get("https://api.spotify.com/v1/me/playlists", {
+        //     Headers: {
+        //         Accept: "application/json",
+        //         "Content-Type": "application/json",
+        //         Authorization: `Bearer ${token}`
+        //     }
+        // }).then(response => setPlaylists(response.data)).catch(error => console.log(error));
+
     }, []);
-    console.log(profile.email
-    );
-    console.log(profile.images);
+
     const handleClick = () => {
         window.location.href = `${apiUrl}?client_id=${clientID}&redirect_uri=${redirectUrl}&scope=${scope.join("%20")}&response_type=${responseType}&show_dialog=true`;
         };
@@ -72,51 +70,6 @@ export default function App() {
     const logout = () => {
         setToken(null);
         window.localStorage.removeItem("token");
-    }
-
-    
-    const searchArtists = async (e) => {
-        e.preventDefault();
-
-        const {data} = await axios.get("https://api.spotify.com/v1/search", {
-            headers: {
-                Authorization: `Bearer ${token}`
-            }, 
-            params: {
-                q: searchKey,
-                type: "artist"
-            }
-        })
-        
-        setArtists(data.artists.items);
-        console.log(data.artists.items);
-    }
-    // const searchTracks = async (e) => {
-    //     e.preventDefault();
-
-    //     const {data} = await  axios.get('https://api.spotify.com/v1/me/player/recently-played?limit=10', {
-    //         headers: {
-    //             Accept: "application/json",
-    //             'Content-type': "application/json",
-    //             Authorization: `Bearer ${token}`
-    //         }
-    //     })
-    //     console.log(data.items);
-    //     setUrl(data);
-    //   }
-    console.log(url);
-    console.log(artists);
-    const renderArtists = () => {
-        return artists === "" ? null : artists.map(artist => (
-            <div className="artist" key={artist.id} onClick={()=>setUrl(artist.uri)}>
-                {artist.images.length ? <img src={artist.images[0].url} alt="" /> : <div>No image</div>}
-                <div className="artist-detail">
-                    {artist.name}<br/>
-                    {artist.genres[0]}
-                </div>
-            </div>
-            )
-        )
     }
 
   return (
@@ -130,28 +83,8 @@ export default function App() {
             <button onClick={handleClick}>Connect Spotify</button>
             <h2>Please login</h2> 
         </div>
-            : <React.Fragment>
-          <Menu logout={logout} profile={profile}/>
-          <div style={{display: 'flex', flexDirection: 'column'}}>
-          <div className="section">
-            <div className="row">           
-              <form className="search" onSubmit={searchArtists}>                  
-                  <button className="searchArtists" type="submit">
-                    <input type="text" onChange={e => setSearchKey(e.target.value)}/>
-                    <RiSearch2Line style={{color: '#05476b'}} />
-                  </button>
-              </form>
-            </div>
-            <div className="render-artists">
-              {renderArtists() }
-              <RecentlyPlayed setUrl={setUrl} recentlyPlayed={recentlyPlayed}/>
-            </div>
-            
-          </div>
-                <Player token={token} url={url}/>
-            </div>
-            <Aside token={token} redirectUrl={redirectUrl}/>
-            </React.Fragment>
+            : 
+            <Home token={token} logout={logout} profile={profile} setUrl={setUrl} url={url} />
         }
     </div>
   )

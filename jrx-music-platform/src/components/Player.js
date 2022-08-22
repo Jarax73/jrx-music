@@ -5,7 +5,7 @@ import axios from 'axios';
 
 const Player = ({ token, url }) => {
     // const url = 'spotify:artist:5pKCCKE2ajJHZ9KAiaK11H';
-    const [play, setPlay] = useState(false);
+    const [play, setPlay] = useState(true);
   // const url = "spotify:artist:5pKCCKE2ajJHZ9KAiaK11H"
     const initialVolume = 20;
     
@@ -22,7 +22,6 @@ const Player = ({ token, url }) => {
                 showSaveIcon
                 callback={(state) => !state.isPlaying && setPlay(false)}
                 initialVolume={initialVolume}
-                autoPlay={true}
                 play={play}
                 uris={url}
                 styles={{
