@@ -7,7 +7,8 @@ export default function Library() {
             <Link to="/search" >
                 <SearchForm />
             </Link>
-            <h1>On Coming... Don't Worry</h1>            
+            <h2 style={{marginLeft: '5%', marginTop: '10%'}}>Library</h2>     
+            <div className="render-artists">No Library</div>
         </div>
     )
 }

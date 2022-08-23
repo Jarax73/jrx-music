@@ -8,12 +8,11 @@ import Playlists from './components/Playlists';
 import Login from './components/Login';
 import Aside from './components/Aside';
 import {Routes, Route} from 'react-router-dom';
-import SearchForm from './components/SearchForm';
 import SearchArtists from './components/SearchArtists';
 
 
 export default function App() {
-  const clientID = "af6fe4b7a75e4651bd1531de3f541e53";
+    const clientID = "af6fe4b7a75e4651bd1531de3f541e53";
     const redirectUrl = "https://jrx-music-platform.vercel.app/";
     const apiUrl = "https://accounts.spotify.com/authorize";
     const responseType = "token";
@@ -32,7 +31,6 @@ export default function App() {
     ];
     const [token, setToken] = useState ("");
     const [profile, setProfile] = useState ("");
-    // const [playlists, setPlaylists] = useState ("");
     const [url, setUrl] = useState ("");
     
     useEffect(() => {
@@ -54,16 +52,7 @@ export default function App() {
                 'Content-type': "application/json",
                 Authorization: `Bearer ${token}`
             }
-        }).then(response => setProfile(response.data)).catch(error => console.log(error));
-
-        // axios.get("https://api.spotify.com/v1/me/playlists", {
-        //     Headers: {
-        //         Accept: "application/json",
-        //         "Content-Type": "application/json",
-        //         Authorization: `Bearer ${token}`
-        //     }
-        // }).then(response => setPlaylists(response.data)).catch(error => console.log(error));
-
+        }).then(response => setProfile(response.data)).catch(error => error);
     }, []);
 
     const handleClick = () => {

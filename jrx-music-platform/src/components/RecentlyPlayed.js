@@ -3,17 +3,17 @@ import axios from "axios";
 import {RiPlayCircleFill} from 'react-icons/ri';
 
 
-export default function RecentlyPlayed({token, setUrl, playTrack, setPlay }){
+export default function RecentlyPlayed({ token, setUrl }){
     const [recentlyPlayed, setRecentlyPlayed] = useState('');
 
     useEffect(()=>{
-        axios.get('https://api.spotify.com/v1/me/player/recently-played?limit=5', {
+        axios.get('https://api.spotify.com/v1/me/player/recently-played?limit=10', {
             headers: {
                 Accept: "application/json",
                 'Content-type': "application/json",
                 Authorization: `Bearer ${token}`
             }
-        }).then(response => setRecentlyPlayed(response.data.items)).catch(error => console.log(error));
+        }).then(response => setRecentlyPlayed(response.data.items)).catch(error => error);
     }, [])
 
     return <div>

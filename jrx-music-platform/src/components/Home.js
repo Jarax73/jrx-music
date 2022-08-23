@@ -1,7 +1,6 @@
 import React from 'react';
 import SearchForm from './SearchForm';
 import { Link } from 'react-router-dom'
-import SearchArtists from './SearchArtists';
 import RecentlyPlayed from './RecentlyPlayed';
 
 export default function Home({ token, setUrl, playTrack, setPlay }) {
