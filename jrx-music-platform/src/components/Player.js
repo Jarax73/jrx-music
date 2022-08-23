@@ -1,18 +1,14 @@
-import { WebPlaybackSDK } from 'react-spotify-web-playback-sdk';
 import React, { useState, useEffect } from 'react';
 import SpotifyPlayer from 'react-spotify-web-playback';
-import axios from 'axios';
 
 const Player = ({ token, url }) => {
-    // const url = 'spotify:artist:5pKCCKE2ajJHZ9KAiaK11H';
-    const [play, setPlay] = useState(true);
-  // const url = "spotify:artist:5pKCCKE2ajJHZ9KAiaK11H"
-    const initialVolume = 20;
+    const [play, setPlay] = useState(false);
+    const initialVolume = 30;
     
     console.log(url);
     useEffect(() => {
-        setPlay(true);
-    }, []);
+        !play ? setPlay(true) : setPlay(false);
+    }, [url]);
 
     if (!token) return null;
     return (
@@ -26,7 +22,7 @@ const Player = ({ token, url }) => {
                 uris={url}
                 styles={{
                     activeColor: '#fff',
-                    bgColor: '#05476b',
+                    bgColor: '#2679a7',
                     color: '#fff',
                     loaderColor: '#fff',
                     sliderColor: '#515151',

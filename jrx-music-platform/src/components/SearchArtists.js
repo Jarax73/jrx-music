@@ -31,7 +31,7 @@ export default function SearchArtists({ token, setUrl }) {
             <h2 style={{width: '54vw', maxWidth: '60vw'}}>Search Results</h2>
             <div className="render-artists">
         {artists === "" ? <div>...</div> : artists.map(artist => (
-            <div className="artist" key={artist.id}>
+            <div className="artist" key={artist.id} onClick={()=>setUrl(artist.uri)}>
                 {artist.images.length ? <img src={artist.images[0].url} alt="" /> : <div>No image</div>}
                 <div className='artist-played'>
                     <div className="artist-detail">

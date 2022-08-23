@@ -8,14 +8,11 @@ import Playlists from './components/Playlists';
 import Login from './components/Login';
 import Aside from './components/Aside';
 import {Routes, Route} from 'react-router-dom';
-import {RiSearch2Line} from 'react-icons/ri';
-import RecentlyPlayed from './components/RecentlyPlayed';
-import SearchArtists from './components/SearchArtists';
 
 
 export default function App() {
   const clientID = "af6fe4b7a75e4651bd1531de3f541e53";
-    const redirectUrl = "http://localhost:3000";
+    const redirectUrl = "http://localhost:4000";
     const apiUrl = "https://accounts.spotify.com/authorize";
     const responseType = "token";
     const scope = [
