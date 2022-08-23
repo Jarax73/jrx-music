@@ -7,7 +7,7 @@ const Player = ({ token, url }) => {
     
     console.log(url);
     useEffect(() => {
-        !play ? setPlay(true) : setPlay(false);
+        setPlay(true);
     }, [url]);
 
     if (!token) return null;

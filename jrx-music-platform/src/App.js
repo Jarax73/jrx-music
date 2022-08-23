@@ -8,11 +8,13 @@ import Playlists from './components/Playlists';
 import Login from './components/Login';
 import Aside from './components/Aside';
 import {Routes, Route} from 'react-router-dom';
+import SearchForm from './components/SearchForm';
+import SearchArtists from './components/SearchArtists';
 
 
 export default function App() {
   const clientID = "af6fe4b7a75e4651bd1531de3f541e53";
-    const redirectUrl = "http://localhost:4000";
+    const redirectUrl = "http://localhost:44175";
     const apiUrl = "https://accounts.spotify.com/authorize";
     const responseType = "token";
     const scope = [
@@ -30,7 +32,7 @@ export default function App() {
     ];
     const [token, setToken] = useState ("");
     const [profile, setProfile] = useState ("");
-    const [playlists, setPlaylists] = useState ("");
+    // const [playlists, setPlaylists] = useState ("");
     const [url, setUrl] = useState ("");
     
     useEffect(() => {
@@ -81,11 +83,14 @@ export default function App() {
             <React.Fragment>
             <Menu logout={logout} profile={profile}/>
                 <div style={{display: 'flex', flexDirection: 'column'}}>
+                    <div className='section'>
                 <Routes>
+                        <Route path="/search" element={<SearchArtists token={token} setUrl={setUrl}/>}/>
                     <Route exact path="/" element={<Home token={token} logout={logout} profile={profile} setUrl={setUrl} url={url} />}/>
                     <Route path="/Library" element={<Library />}/>
                     <Route path="/Playlists" element={<Playlists />}/>
                 </Routes>
+                    </div>
                 <Player token={token} url={url}/>
                 </div>
                 <Aside/>

@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { RiSearch2Line } from 'react-icons/ri';
 import axios from 'axios';
 import {RiPlayCircleFill} from 'react-icons/ri';
+import SearchForm from './SearchForm';
 
 export default function SearchArtists({ token, setUrl }) {
     const [searchKey, setSearchKey] = useState('');
@@ -32,7 +32,7 @@ export default function SearchArtists({ token, setUrl }) {
             <div className="render-artists">
         {artists === "" ? <div>...</div> : artists.map(artist => (
             <div className="artist" key={artist.id} onClick={()=>setUrl(artist.uri)}>
-                {artist.images.length ? <img src={artist.images[0].url} alt="" /> : <div>No image</div>}
+                {artist.images.length ? <img src={artist.images[2].url} alt="" /> : <div>No image</div>}
                 <div className='artist-played'>
                     <div className="artist-detail">
                         {artist.name}<br/>
@@ -52,18 +52,8 @@ export default function SearchArtists({ token, setUrl }) {
     
 
     return (
-        <div>
-            <div className="row">
-                <form className="search" onSubmit={searchArtists}>
-                    <button className="searchArtists" type="submit">
-                        <input
-                            type="text"
-                            onChange={e => setSearchKey(e.target.value)}
-                        />
-                        <RiSearch2Line style={{ color: '#05476b' }} />
-                    </button>
-                </form>
-            </div>
+        <div>            
+            <SearchForm searchArtists={searchArtists} setSearchKey={setSearchKey} />
             <div className="render-artists">{renderArtists()}</div>
         </div>
     );

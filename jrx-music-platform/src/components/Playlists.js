@@ -1,5 +1,7 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
+import SearchForm from './SearchForm';
+import { Link } from 'react-router-dom'
 
 
 export default function Playlists({ token }){
@@ -18,7 +20,10 @@ export default function Playlists({ token }){
 
     return (
         <div className="section">
-            <h1>On Coming... Don't Worry</h1>
+            <Link to="/search" >
+                <SearchForm />
+            </Link>
+            <h1>On Coming... Don't Worry</h1>            
         </div>
     )
 }
