@@ -1,14 +1,18 @@
 
 
 export default function Profile({profile}){
+    console.log(profile.images);
     return(
         <div style={{display: 'flex', fontSize: '10px', justifyContent: 'space-between'}}>
-            {!profile.images ? [] : 
+            {Array.isArray(profile.images) && profile.images.length ? 
             <div style={{marginRight:'5px'}}>
                 <img src={profile.images[0].url} alt={profile.display_name} style={{borderRadius:'50%'}}/>
-            </div>}
+            </div> : []            
+            }
             <div>
-                <div>{profile.display_name}</div>
+                <div style={{
+                    marginBottom:'3%'
+                }}>{profile.display_name}</div>
                 <div>{profile.email}</div>
             </div>
         </div>

@@ -12,10 +12,8 @@ import SearchForm from './components/SearchForm';
 
 
 export default function App() {
-    const clientID = "9fd3ef26a5114097853bbdc04f47845e";
-    // const clientID = "af6fe4b7a75e4651bd1531de3f541e53";
-//   const redirectUrl = "https://jrx-music-platform.vercel.app/";
-    const redirectUrl = "http://localhost:3002";
+    const clientID = "af6fe4b7a75e4651bd1531de3f541e53";
+  const redirectUrl = "https://jrx-music-platform.vercel.app/";
     const apiUrl = "https://accounts.spotify.com/authorize";
     const responseType = "token";
     const scope = [
@@ -34,6 +32,7 @@ export default function App() {
     const [token, setToken] = useState ("");
     const [profile, setProfile] = useState ("");
     const [url, setUrl] = useState ("");
+    const [totalPlaylistTracks, setTotalPlaylistTracks] = useState ([]);
     
     useEffect(() => {
         const hash = window.location.hash;
@@ -66,6 +65,8 @@ export default function App() {
         window.localStorage.removeItem("token");
     }
 
+    
+
   return (
     <div className="container">
         {!token ?
@@ -77,14 +78,14 @@ export default function App() {
                     <div className='section'>
                         <Routes>
                             <Route path="/search" element={<SearchForm token={token} setUrl={setUrl} />} />
-                            <Route exact path="/" element={<Home token={token} logout={logout} profile={profile} setUrl={setUrl} url={url} />}/>
+                            <Route exact path="/" element={<Home token={token} setUrl={setUrl} />}/>
                             <Route path="/Library" element={<Library />}/>
-                            <Route path="/Playlists" element={<Playlists />}/>
+                            <Route path="/Playlists" element={<Playlists token={token} setUrl={setUrl} setTotalPlaylistTracks={setTotalPlaylistTracks} />}/>
                         </Routes>
                     </div>
                     <Player token={token} url={url}/>
                 </div>
-                <Aside/>
+                <Aside totalPlaylistTracks={totalPlaylistTracks} />
             </React.Fragment>
         }
     </div>

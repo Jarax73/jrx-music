@@ -2,8 +2,9 @@ import React from 'react';
 import { RiPlayCircleFill } from 'react-icons/ri';
 import { IoMusicalNotesSharp } from 'react-icons/io5';
 
-export default function Aside({ token }) {
-    console.log(token);
+export default function Aside({ totalPlaylistTracks }) {
+    
+    console.log(totalPlaylistTracks);
     return (
         <div className="aside">
             <h2>Notifications</h2>
@@ -13,7 +14,7 @@ export default function Aside({ token }) {
                 </div>
                 <div className="inside-notifications">
                     <a href="#">Playlist Added</a>
-                    <p>200 songs</p>
+                    <p>{totalPlaylistTracks} songs</p>
                 </div>
             </div>
             <div className="notifications-side">

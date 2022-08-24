@@ -4,8 +4,7 @@ import SpotifyPlayer from 'react-spotify-web-playback';
 const Player = ({ token, url }) => {
     const [play, setPlay] = useState(false);
     const initialVolume = 30;
-    
-    console.log(url);
+
     useEffect(() => {
         setPlay(true);
     }, [url]);
@@ -22,7 +21,7 @@ const Player = ({ token, url }) => {
                 uris={url}
                 styles={{
                     activeColor: '#fff',
-                    bgColor: '#2679a7',
+                    bgColor: '#74AECE',
                     color: '#fff',
                     loaderColor: '#fff',
                     sliderColor: '#515151',

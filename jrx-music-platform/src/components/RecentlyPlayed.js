@@ -17,13 +17,13 @@ export default function RecentlyPlayed({ token, setUrl }){
     }, [])
 
     return (
-        <div>
+        <div classname='section'>
             <h2 style={{marginLeft: '5%', marginTop: '10%'}}>Recently Played</h2>
             <div className="render-artists">
                 {recentlyPlayed == "" ? "Loading..." : recentlyPlayed.map((played)=> 
                     <div className="artist" key={played.track.id}>
                         {played.track.album.images.length ? 
-                        <img src={played.track.album.images[0].url} alt=""/> : 
+                        <img src={played.track.album.images[0].url} alt={played.track.name}/> : 
                         <img src={played.track.album.images[0].url} alt="No image"/>}
                         <div className='artist-played'>
                             <div className="artist-detail">

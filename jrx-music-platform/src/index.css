@@ -22,9 +22,7 @@ code {
   margin: auto;
   height: 99vh;
   width: 99vw;
-  /* min-width: 100%; */
-  /* background-color:#2679a7;   */
-  background: linear-gradient(#49BEdF, #05476b);
+  background: linear-gradient(#74AECE, #515151);
 }
 .main{
   display: flex;
@@ -42,7 +40,6 @@ code {
 }
 img{
   height: 5vh;
-  /* margin-bottom: 5rem; */
 }
 button {
   padding: 0.2rem 1rem;
@@ -57,16 +54,6 @@ button {
   align-items: center;
   justify-content: space-between;
 }
-/* .nav-bar{
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
-} */
-.nav-bar button{
-  margin-left: 20px;
-  height: 7%;
-}
 .row{
   position: relative;
 }
@@ -75,7 +62,7 @@ button {
   justify-content: flex-end;
   align-items: center;
   position: fixed;
-  top: 0;
+  top: 1%;
   right: 30%;
   margin-top: 10px;
   z-index: 2;
@@ -98,9 +85,7 @@ button {
   display: flex;
   flex-direction: column;
   width: 25%;
-  height: ;
-  margin: 5% 0.1% ;
-  padding-bottom: 1%;
+  margin: 5% 0.1%;
   border-radius: 10px;
   background-color: #05476b;
 }
@@ -117,7 +102,7 @@ button {
   width: 100%;
   max-width: 60vw;
   display: flex;
-  gap: 0;
+  flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-around;
   align-items: space-between;
@@ -141,9 +126,6 @@ button {
   align-items: center;
   margin-bottom: 1%;
   height: 6vh;
-}
-.tracks img{
-
 }
 .track-organized{
   display:  flex;
@@ -192,10 +174,11 @@ button {
   position: relative;
   width: 100%;
   padding: 0;
-  /* margin: 0; */
+  margin: 0;
   height: 99vh;
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
   overflow: auto;
 }
 .player-container{
@@ -214,7 +197,6 @@ button {
   width:35%;
   height: 99vh;
   border-radius: 0px 15px 15px 0px ;
-  /* background-color: #05476b; */
   background: linear-gradient(#05476b, #000);
   color: #fff;
   padding-left: 20px;

@@ -1,6 +1,6 @@
 import { RiSearch2Line } from 'react-icons/ri';
 import axios from 'axios';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import SearchArtists from './SearchArtists';
 
 export default function SearchForm({ token, setUrl}){
@@ -22,19 +22,20 @@ export default function SearchForm({ token, setUrl}){
         })
         setArtists(data.artists.items);
     }
-    console.log(artists);
+
     return(
-        <div className="row">
-            <form className="search" onSubmit={searchArtists}>
-                <button className="searchArtists" type="submit">
-                    <input
-                        type="text"
-                        onChange={e => setSearchKey(e.target.value)}
-                    />
-                    <RiSearch2Line style={{ color: 'white' }} />
-                </button>
-            </form>
+        <React.Fragment>
+            <div className="row">
+                <form className="search" onSubmit={searchArtists}>
+                    <button className="searchArtists" type="submit">
+                        <input
+                            type="text"
+                            onChange={e => setSearchKey(e.target.value)}
+                        />
+                        <RiSearch2Line style={{ color: 'white' }} />
+                    </button>
+                </form>
+            </div>
             <SearchArtists setUrl={setUrl} artists={artists} />
-        </div>
-    )
+        </React.Fragment>)
 }
