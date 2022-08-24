@@ -19,9 +19,6 @@ export default function Playlists({ token }){
 
     return (
         <div className="section">
-            <Link to="/search" >
-                <SearchForm />
-            </Link>
             <h2 style={{marginLeft: '5%', marginTop: '10%'}}>My Playlists</h2>
             {playlists == [] ? 
                 <div className="render-artists">No Playlists</div> : 

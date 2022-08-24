@@ -84,12 +84,12 @@ button {
   display: flex;
   align-items: center;
   border: none;
-  background-color: #49BEFF;
+  background-color: #4186ab;
 }
 .search input{
   border: none;
   color: white;
-  background-color: #49BEFF;
+  background-color: #4186ab;
 }
 .search input:focus{
   outline: none;

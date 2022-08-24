@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { RiHome2Fill } from 'react-icons/ri';
+import { RiSearch2Line } from 'react-icons/ri';
 import { RiPlayList2Fill } from 'react-icons/ri';
 import { RiMusic2Fill } from 'react-icons/ri';
 import { RiLogoutCircleRFill } from 'react-icons/ri';
@@ -19,6 +20,14 @@ export default function Menu({ logout, profile }) {
                                 <RiHome2Fill />
                             </span>
                             <div>Home</div>
+                        </li>
+                    </Link>
+                    <Link to="/search">
+                        <li>
+                            <span className="icons">
+                                <RiSearch2Line />
+                            </span>
+                            <div>Search</div>
                         </li>
                     </Link>
                     <Link to="/library">

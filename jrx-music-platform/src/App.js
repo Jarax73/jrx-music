@@ -8,12 +8,14 @@ import Playlists from './components/Playlists';
 import Login from './components/Login';
 import Aside from './components/Aside';
 import {Routes, Route} from 'react-router-dom';
-import SearchArtists from './components/SearchArtists';
+import SearchForm from './components/SearchForm';
 
 
 export default function App() {
-    const clientID = "af6fe4b7a75e4651bd1531de3f541e53";
-    const redirectUrl = "https://jrx-music-platform.vercel.app/";
+    const clientID = "9fd3ef26a5114097853bbdc04f47845e";
+    // const clientID = "af6fe4b7a75e4651bd1531de3f541e53";
+//   const redirectUrl = "https://jrx-music-platform.vercel.app/";
+    const redirectUrl = "http://localhost:3002";
     const apiUrl = "https://accounts.spotify.com/authorize";
     const responseType = "token";
     const scope = [
@@ -52,9 +54,9 @@ export default function App() {
                 'Content-type': "application/json",
                 Authorization: `Bearer ${token}`
             }
-        }).then(response => setProfile(response.data)).catch(error => error);
+        }).then(response => setProfile(response.data)).catch(error => console.log(error));
     }, []);
-
+    
     const handleClick = () => {
         window.location.href = `${apiUrl}?client_id=${clientID}&redirect_uri=${redirectUrl}&scope=${scope.join("%20")}&response_type=${responseType}&show_dialog=true`;
         };
@@ -70,17 +72,17 @@ export default function App() {
         <Login handleClick={handleClick}/>
             : 
             <React.Fragment>
-            <Menu logout={logout} profile={profile}/>
+                <Menu logout={logout} profile={profile}/>
                 <div style={{display: 'flex', flexDirection: 'column'}}>
                     <div className='section'>
-                <Routes>
-                        <Route path="/search" element={<SearchArtists token={token} setUrl={setUrl}/>}/>
-                    <Route exact path="/" element={<Home token={token} logout={logout} profile={profile} setUrl={setUrl} url={url} />}/>
-                    <Route path="/Library" element={<Library />}/>
-                    <Route path="/Playlists" element={<Playlists />}/>
-                </Routes>
+                        <Routes>
+                            <Route path="/search" element={<SearchForm token={token} setUrl={setUrl} />} />
+                            <Route exact path="/" element={<Home token={token} logout={logout} profile={profile} setUrl={setUrl} url={url} />}/>
+                            <Route path="/Library" element={<Library />}/>
+                            <Route path="/Playlists" element={<Playlists />}/>
+                        </Routes>
                     </div>
-                <Player token={token} url={url}/>
+                    <Player token={token} url={url}/>
                 </div>
                 <Aside/>
             </React.Fragment>
