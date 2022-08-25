@@ -88,6 +88,7 @@ button {
   margin: 5% 0.1%;
   border-radius: 10px;
   background-color: #05476b;
+  object-fit: cover;
 }
 .artist img{
   border-radius: 10px;
@@ -106,8 +107,6 @@ button {
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-around;
-  align-items: space-between;
-  margin-top: 30px;
 }
 .play{
   margin-right: 10px;

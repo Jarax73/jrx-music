@@ -24,62 +24,64 @@ export default function Library({token, setUrl}) {
         }).then(response => setTopArtists(response.data.items))
 
     }, []);
-    console.log(albums);
-    console.log(topArtists);
+    
     return (
         <div className='section'>
-            <h2 style={{
-                marginLeft: '5%', 
-                marginTop: '9%',
-                position:'fixed', 
-                top: '-16%',
-                left: '16%'
-                }}>New releases</h2>     
+            <h2 style={{marginLeft: '5%', marginTop: '10%'}}>Your Top Artists</h2>
             <div className="render-artists">
-                <div className="library">
-                    {!albums ? "Loading..." : albums.map(album =>
-                        <div 
+                {!topArtists ? 
+                    <div style={{
+                        margin: '20% auto'
+                    }} >Nothing yet ...</div> : topArtists.map(topArtist =>
+                        <div className="artist" key={topArtist.id} onClick={()=>{setUrl(topArtist.uri)}} >
+                            <div>
+                                {topArtist.images.length ? <img src={topArtist.images[0].url} alt={topArtist.name} /> : 
+                                    <img src={topArtist.images[0].url} alt="No image"/>}
+                                    <div style={{
+                                        padding: '5px'
+                                    }}>
+                                        <div>{topArtist.name}</div>
+                                        <div className="artist-played">
+                                            <div>{topArtist.followers.total} followers</div>
+                                            <div className='play' onClick={()=>{setUrl(topArtist.uri)}}>                        
+                                                <RiPlayCircleFill/>
+                                            </div>
+                                        </div>
+                                    </div>
+                            </div>
+                        </div>
+                    )
+                    }
+            </div>
+
+            <h2 style={{marginLeft: '5%', marginTop: '10%'}}>New releases</h2>     
+            <div className="render-artists">
+                
+                    {!albums ? <div style={{
+                        margin: '20% auto'
+                    }} >Nothing yet ...</div> : albums.map(album =>
+                        <div className="artist"
                             key={album.id} 
-                            onClick={()=>{setUrl(album.uri)}}
-                            style={{
-                                display: 'flex',
-                                flexDirection: 'column',
-                                // width: '100%',
-                                margin: '4% 1%',
-                                borderRadius: '10px',
-                                backgroundColor: '#05476b'
-                            }}
-                            >
+                            onClick={()=>{setUrl(album.uri)}}>
                             
                             {album.images.length ? 
-                                <img 
-                                    src={album.images[0].url} 
-                                    alt={album.name} 
-                                    style={{
-                                        borderRadius: '10px',
-                                        width: '100%',
-                                        marginBottom: '10px',
-                                        height: '70%',
-                                        objectFit: 'cover'
-                                    }}
-                                    /> :
-                                <img src={album.images[0].url} alt="name" />}
+                                <img src={album.images[0].url} alt={album.name}/> :
+                                <img src={album.images[0].url} alt="No image" />}
                             <div style={{
-                                padding: '2%'
+                                padding: '5px'
                             }}>
-                            <div>{album.name}</div>
-                            <div>{album.artists[0].name}</div>
-                            <div className="artist-played">
-                                <div>{album.total_tracks} songs</div>
-                                <div className='play' onClick={()=>{setUrl(album.uri)}}>                        
-                                    <RiPlayCircleFill/>
+                                <div>{album.name}</div>
+                                <div>{album.artists[0].name}</div>
+                                <div className="artist-played">
+                                    <div>{album.total_tracks} songs</div>
+                                    <div className='play' onClick={()=>{setUrl(album.uri)}}>                        
+                                        <RiPlayCircleFill/>
+                                    </div>
                                 </div>
-                            </div>
                             </div>
                         </div>
                         )
                     }
-                </div>
             </div>
         </div>
     )

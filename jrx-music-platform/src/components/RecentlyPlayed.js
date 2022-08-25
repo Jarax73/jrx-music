@@ -20,7 +20,7 @@ export default function RecentlyPlayed({ token, setUrl }){
         <div className='section'>
             <h2 style={{marginLeft: '5%', marginTop: '10%'}}>Recently Played</h2>
             <div className="render-artists">
-                {recentlyPlayed == "" ? "Loading..." : recentlyPlayed.map((played)=> 
+                {recentlyPlayed == "" ? "Nothing yet ..." : recentlyPlayed.map((played)=> 
                     <div className="artist" key={played.track.id} onClick={()=>{setUrl(played.track.uri)}}>
                         {played.track.album.images.length ? 
                         <img src={played.track.album.images[0].url} alt={played.track.name}/> : 

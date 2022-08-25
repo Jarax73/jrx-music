@@ -1,7 +1,5 @@
 import React from 'react';
 
-
-
 export default function Login({handleClick}){
     return (
         <div className="home">

@@ -6,9 +6,9 @@ export default function SearchArtists({ setUrl, artists }) {
     const renderArtists = () => {
         return (
             <>
-                <h2 style={{marginLeft: '5%', marginTop: '7%', width: '100%'}}>Search Results</h2>
-                <div className='render-artists'>
-                    {artists === "" ? <div>...</div> : artists.map(artist => 
+                
+                <div className='render-artists'style={{marginTop: '5%'}}>
+                    {artists === "" ? <div></div> : artists.map(artist => 
                         <div className="artist" key={artist.id} onClick={()=>setUrl(artist.uri)}>
                             {artist.images.length ? <img src={artist.images[2].url} alt="" /> : <div>No image</div>}
                             <div className='artist-played'>

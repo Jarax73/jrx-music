@@ -12,10 +12,8 @@ import SearchForm from './components/SearchForm';
 
 
 export default function App() {
-    const clientID = "9fd3ef26a5114097853bbdc04f47845e";
-    // const clientID = "af6fe4b7a75e4651bd1531de3f541e53";
-//   const redirectUrl = "https://jrx-music-platform.vercel.app/";
-    const redirectUrl = "http://localhost:3000";
+    const clientID = "af6fe4b7a75e4651bd1531de3f541e53";
+    const redirectUrl = "https://jrx-music-platform.vercel.app/";
     const apiUrl = "https://accounts.spotify.com/authorize";
     const responseType = "token";
     const scope = [
@@ -44,8 +42,6 @@ export default function App() {
             token = hash.substring(1).split("&").find(elem => elem.startsWith("access_token")).split("=")[1];
             window.location.hash = "";
             window.localStorage.setItem ("token", token);
-            
-            console.log(localStorage);
         }
         setToken(token);
         
@@ -55,7 +51,7 @@ export default function App() {
                 'Content-type': "application/json",
                 Authorization: `Bearer ${token}`
             }
-        }).then(response => setProfile(response.data)).catch(error => console.log(error));
+        }).then(response => setProfile(response.data)).catch(error => (error));
     }, []);
     
     const handleClick = () => {

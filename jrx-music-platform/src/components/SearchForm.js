@@ -30,6 +30,7 @@ export default function SearchForm({ token, setUrl}){
                     <button className="searchArtists" type="submit">
                         <input
                             type="text"
+                            placeholder='Artists'
                             onChange={e => setSearchKey(e.target.value)}
                         />
                         <RiSearch2Line style={{ color: 'white' }} />

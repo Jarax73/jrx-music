@@ -27,7 +27,9 @@ export default function Playlists({ token, setUrl, setTotalPlaylistTracks }){
             <h2 style={{marginLeft: '5%', marginTop: '10%'}}>My Playlists</h2>
             <div className="render-artists">
             {playlists == [] ? 
-                <>No Playlists</> : 
+                <div style={{
+                        margin: '20% auto'
+                    }} >Nothing yet ...</div>: 
                 playlists.map(playlist => (
                     <div className="artist" key={playlist.id} onClick={()=>{setUrl(playlist.uri)}}>
                         {playlist.images.length ? 
