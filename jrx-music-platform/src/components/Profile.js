@@ -1,7 +1,6 @@
 
 
 export default function Profile({profile}){
-    console.log(profile.images);
     return(
         <div style={{display: 'flex', fontSize: '10px', justifyContent: 'space-between'}}>
             {Array.isArray(profile.images) && profile.images.length ? 

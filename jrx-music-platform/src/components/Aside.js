@@ -4,7 +4,6 @@ import { IoMusicalNotesSharp } from 'react-icons/io5';
 
 export default function Aside({ totalPlaylistTracks }) {
     
-    console.log(totalPlaylistTracks);
     return (
         <div className="aside">
             <h2>Notifications</h2>
