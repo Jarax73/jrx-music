@@ -29,7 +29,7 @@ export default function Playlists({ token, setUrl, setTotalPlaylistTracks }){
             {playlists == [] ? 
                 <>No Playlists</> : 
                 playlists.map(playlist => (
-                    <div className="artist">
+                    <div className="artist" key={playlist.id} onClick={()=>{setUrl(playlist.uri)}}>
                         {playlist.images.length ? 
                             <img src={playlist.images[0].url} alt={playlist.name} /> : 
                             <img alt="No image" />}
@@ -53,7 +53,7 @@ export default function Playlists({ token, setUrl, setTotalPlaylistTracks }){
                     </div>
                 ))
                 } 
-                </div>        
+            </div>        
         </>
     )
 }

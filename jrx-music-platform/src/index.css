@@ -94,6 +94,7 @@ button {
   width: 100%;
   margin-bottom: 10px;
   height: 70%;
+  object-fit: cover;
 }
 .artist-detail{
   padding: 10px 7px;
@@ -129,6 +130,11 @@ button {
 }
 .track-organized{
   display:  flex;
+}
+.library{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
 }
 .menu{
   width: 30%;
