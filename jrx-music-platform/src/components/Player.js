@@ -1,7 +1,12 @@
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import SpotifyPlayer from 'react-spotify-web-playback';
 
 const Player = ({ token, url }) => {
+    Player.propTypes = {
+        token: PropTypes.string,
+        url: PropTypes.string,
+    };
     const [play, setPlay] = useState(false);
     const initialVolume = 30;
 
