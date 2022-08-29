@@ -9,7 +9,7 @@ import Profile from '../Profile';
 
 export default function Menu({ logout, profile }) {
     Menu.propTypes = {
-        logout: PropTypes.bool,
+        logout: PropTypes.func,
         profile: PropTypes.object,
     };
     return (
