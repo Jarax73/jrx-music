@@ -4,7 +4,7 @@ export default function Profile({ profile }) {
     Profile.propTypes = {
         profile: PropTypes.object,
     };
-    console.log(profile);
+
     return (
         <div
             style={{
