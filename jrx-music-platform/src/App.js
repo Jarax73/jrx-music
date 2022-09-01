@@ -74,7 +74,7 @@ export default function App() {
             })
             .catch((error) => error);
     }, []);
-    console.log(currentlyPlaying);
+
     const handleClick = () => {
         window.location.href = `${apiUrl}?client_id=${clientID}&redirect_uri=${redirectUrl}&scope=${scope.join(
             '%20'
@@ -146,6 +146,8 @@ export default function App() {
                     <Aside
                         totalPlaylistTracks={totalPlaylistTracks}
                         currentlyPlaying={currentlyPlaying}
+                        profile={profile}
+                        logout={logout}
                     />
                 </React.Fragment>
             )}

@@ -36,7 +36,7 @@ export default function RecentlyPlayed({ token, setUrl }) {
                     ? 'Nothing yet ...'
                     : recentlyPlayed.map((played) => (
                           <div
-                              className="artist"
+                              className="recent-track artist"
                               key={played.track.id}
                               onClick={() => {
                                   setUrl(played.track.uri);
@@ -54,10 +54,12 @@ export default function RecentlyPlayed({ token, setUrl }) {
                                   />
                               )}
                               <div className="artist-played">
-                                  <div className="artist-detail">
-                                      {played.track.album.artists[0].name}{' '}
+                                  <div className="artist-detail names">
+                                      <div>
+                                          {played.track.album.artists[0].name}{' '}
+                                      </div>
                                       <br />
-                                      {played.track.name}
+                                      <div>{played.track.name}</div>
                                   </div>
                                   <div
                                       className="play"
