@@ -12,8 +12,8 @@ import { Routes, Route } from 'react-router-dom';
 import SearchForm from './components/SearchForm';
 
 export default function App() {
-    const clientID = '9fd3ef26a5114097853bbdc04f47845e';
-    const redirectUrl = 'http://192.168.0.153:3000';
+    const clientID = 'af6fe4b7a75e4651bd1531de3f541e53';
+    const redirectUrl = 'https://jrx-music.vercel.app/';
     const apiUrl = 'https://accounts.spotify.com/authorize';
     const responseType = 'token';
     const scope = [
