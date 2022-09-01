@@ -146,6 +146,8 @@ export default function App() {
                     <Aside
                         totalPlaylistTracks={totalPlaylistTracks}
                         currentlyPlaying={currentlyPlaying}
+                        profile={profile}
+                        logout={logout}
                     />
                 </React.Fragment>
             )}

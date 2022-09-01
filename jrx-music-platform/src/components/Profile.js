@@ -6,13 +6,7 @@ export default function Profile({ profile }) {
     };
 
     return (
-        <div
-            style={{
-                display: 'flex',
-                fontSize: '10px',
-                justifyContent: 'space-between',
-            }}
-        >
+        <div className="profile">
             {Array.isArray(profile.images) && profile.images.length ? (
                 <div style={{ marginRight: '5px' }}>
                     <img
@@ -24,7 +18,7 @@ export default function Profile({ profile }) {
             ) : (
                 []
             )}
-            <div>
+            <div className="profile-info">
                 <div
                     style={{
                         marginBottom: '3%',
