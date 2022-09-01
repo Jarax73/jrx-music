@@ -13,7 +13,7 @@ import SearchForm from './components/SearchForm';
 
 export default function App() {
     const clientID = 'af6fe4b7a75e4651bd1531de3f541e53';
-    const redirectUrl = 'https://jrx-music.vercel.app/';
+    const redirectUrl = 'https://jrx-music-platform.vercel.app/';
     const apiUrl = 'https://accounts.spotify.com/authorize';
     const responseType = 'token';
     const scope = [
