@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { RiPlayCircleFill } from 'react-icons/ri';
-// import { IoMusicalNotesSharp } from 'react-icons/io5';
 import { Link } from 'react-router-dom';
 
 export default function Aside({ totalPlaylistTracks }) {
