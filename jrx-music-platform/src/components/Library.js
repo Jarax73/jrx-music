@@ -1,15 +1,17 @@
 import axios from 'axios';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { RiPlayCircleFill } from 'react-icons/ri';
 
-export default function Library({ token, setUrl }) {
+export default function Library({ token, setUrl, setId }) {
     Library.propTypes = {
         token: PropTypes.string,
         setUrl: PropTypes.func,
+        setId: PropTypes.func,
     };
     const [albums, setAlbums] = useState('');
-    const [topArtists, setTopArtists] = useState('');
+    const [topArtists, setTopArtists] = useState([]);
 
     useEffect(() => {
         axios
@@ -49,52 +51,43 @@ export default function Library({ token, setUrl }) {
                     </div>
                 ) : (
                     topArtists.map((topArtist) => (
-                        <div
-                            className="artist"
+                        <Link
+                            to="/Albums"
                             key={topArtist.id}
+                            className="artist"
                             onClick={() => {
-                                setUrl(topArtist.uri);
+                                setId(topArtist.id);
                             }}
                         >
                             <div>
-                                {topArtist.images.length ? (
-                                    <img
-                                        src={topArtist.images[0].url}
-                                        alt={topArtist.name}
-                                    />
-                                ) : (
-                                    <img
-                                        src={topArtist.images[0].url}
-                                        alt="No image"
-                                    />
-                                )}
-                                <div
-                                    style={{
-                                        padding: '5px',
-                                    }}
-                                >
-                                    <div>{topArtist.name}</div>
-                                    <div className="artist-played">
-                                        <div>
-                                            {topArtist.followers.total}{' '}
-                                            followers
-                                        </div>
-                                        <div
-                                            className="play"
-                                            onClick={() => {
-                                                setUrl(topArtist.uri);
-                                            }}
-                                        >
-                                            <RiPlayCircleFill />
+                                <div>
+                                    {topArtist.images.length === 0 ? (
+                                        <img alt="No image" />
+                                    ) : (
+                                        <img
+                                            src={topArtist.images[0].url}
+                                            alt={topArtist.name}
+                                        />
+                                    )}
+                                    <div
+                                        style={{
+                                            padding: '5px',
+                                        }}
+                                    >
+                                        <div>{topArtist.name}</div>
+                                        <div className="artist-played">
+                                            <div>
+                                                {topArtist.followers.total}{' '}
+                                                followers
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </Link>
                     ))
                 )}
             </div>
-
             <h2 style={{ marginLeft: '5%', marginTop: '10%' }}>New releases</h2>
             <div className="render-artists">
                 {!albums ? (

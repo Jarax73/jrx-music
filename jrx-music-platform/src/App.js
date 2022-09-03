@@ -6,6 +6,8 @@ import Player from './components/Player';
 import Home from './components/Home';
 import Library from './components/Library';
 import Playlists from './components/Playlists';
+import Albums from './components/Albums';
+import Tracks from './components/Tracks';
 import Login from './components/Login';
 import Aside from './components/Aside';
 import { Routes, Route } from 'react-router-dom';
@@ -34,6 +36,8 @@ export default function App() {
     const [url, setUrl] = useState('');
     const [totalPlaylistTracks, setTotalPlaylistTracks] = useState('');
     const [currentlyPlaying, setCurrentlyPlaying] = useState({});
+    const [id, setId] = useState('');
+    const [artistsAlbums, getArtistsAlbums] = useState([]);
 
     useEffect(() => {
         const hash = window.location.hash;
@@ -124,6 +128,7 @@ export default function App() {
                                         <Library
                                             token={token}
                                             setUrl={setUrl}
+                                            setId={setId}
                                         />
                                     }
                                 />
@@ -136,6 +141,29 @@ export default function App() {
                                             setTotalPlaylistTracks={
                                                 setTotalPlaylistTracks
                                             }
+                                        />
+                                    }
+                                />
+                                <Route
+                                    path="/Albums"
+                                    element={
+                                        <Albums
+                                            token={token}
+                                            id={id}
+                                            setId={setId}
+                                            artistsAlbums={artistsAlbums}
+                                            getArtistsAlbums={getArtistsAlbums}
+                                        />
+                                    }
+                                />
+                                <Route
+                                    path="/Tracks"
+                                    element={
+                                        <Tracks
+                                            token={token}
+                                            id={id}
+                                            setUrl={setUrl}
+                                            artistsAlbums={artistsAlbums}
                                         />
                                     }
                                 />
