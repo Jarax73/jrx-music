@@ -4,9 +4,11 @@ import axios from 'axios';
 import React, { useState } from 'react';
 import SearchArtists from './SearchArtists';
 
-export default function SearchForm({ token, setUrl }) {
+export default function SearchForm({ token, setUrl, play, playerDevice }) {
     SearchForm.propTypes = {
         token: PropTypes.string,
+        playerDevice: PropTypes.object,
+        play: PropTypes.func,
         setUrl: PropTypes.func,
     };
     const [searchKey, setSearchKey] = useState('');
@@ -21,12 +23,12 @@ export default function SearchForm({ token, setUrl }) {
             },
             params: {
                 q: searchKey,
-                type: 'track,artist',
+                type: 'artist',
             },
         });
         setArtists(data.artists.items);
     };
-    console.log(artists);
+
     return (
         <React.Fragment>
             <div className="row">
@@ -41,7 +43,12 @@ export default function SearchForm({ token, setUrl }) {
                     </button>
                 </form>
             </div>
-            <SearchArtists setUrl={setUrl} artists={artists} />
+            <SearchArtists
+                setUrl={setUrl}
+                artists={artists}
+                play={play}
+                playerDevice={playerDevice}
+            />
         </React.Fragment>
     );
 }

@@ -29,7 +29,7 @@ export default function Albums({
             })
             .then((response) => getArtistsAlbums(response.data.items));
     }, []);
-    console.log(artistsAlbums);
+
     return (
         <div className="section">
             {<h2 style={{ marginLeft: '5%', marginTop: '10%' }}></h2>}
@@ -44,22 +44,19 @@ export default function Albums({
                             className="artist"
                             onClick={() => setId(artistsAlbum.id)}
                         >
-                            {/* <div>
-                                <div> */}
                             {artistsAlbum.images.length === 0 ? (
                                 <img alt="No image" />
                             ) : (
                                 <img src={artistsAlbum.images[0].url} />
                             )}
-                            {/* </div> */}
-                            <div style={{ padding: '5px' }}>
+
+                            <div className="artist-detail">
                                 <div>{artistsAlbum.name}</div>
                                 <div className="artist-played">
                                     {artistsAlbum.release_date}
                                 </div>
                                 <div>{artistsAlbum.total_tracks} songs</div>
                             </div>
-                            {/* </div> */}
                         </Link>
                     ))
                 )}

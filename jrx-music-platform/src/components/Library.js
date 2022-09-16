@@ -4,11 +4,13 @@ import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { RiPlayCircleFill } from 'react-icons/ri';
 
-export default function Library({ token, setUrl, setId }) {
+export default function Library({ token, setUrl, play, playerDevice, setId }) {
     Library.propTypes = {
         token: PropTypes.string,
+        playerDevice: PropTypes.object,
         setUrl: PropTypes.func,
         setId: PropTypes.func,
+        play: PropTypes.func,
     };
     const [albums, setAlbums] = useState('');
     const [topArtists, setTopArtists] = useState([]);
@@ -59,8 +61,6 @@ export default function Library({ token, setUrl, setId }) {
                                 setId(topArtist.id);
                             }}
                         >
-                            {/* <div> */}
-                            {/* <div> */}
                             {topArtist.images.length === 0 ? (
                                 <img alt="No image" />
                             ) : (
@@ -77,8 +77,6 @@ export default function Library({ token, setUrl, setId }) {
                                     </div>
                                 </div>
                             </div>
-                            {/* </div> */}
-                            {/* </div> */}
                         </Link>
                     ))
                 )}
@@ -98,9 +96,11 @@ export default function Library({ token, setUrl, setId }) {
                         <div
                             className="artist"
                             key={album.id}
-                            onClick={() => {
-                                setUrl(album.uri);
-                            }}
+                            onClick={() =>
+                                playerDevice.devices[0] === undefined
+                                    ? setUrl(album.uri)
+                                    : play(album.uri)
+                            }
                         >
                             {album.images.length ? (
                                 <img
@@ -110,20 +110,19 @@ export default function Library({ token, setUrl, setId }) {
                             ) : (
                                 <img src={album.images[0].url} alt="No image" />
                             )}
-                            <div
-                                style={{
-                                    padding: '10px',
-                                }}
-                            >
+                            <div className="artist-detail">
                                 <div>{album.name}</div>
                                 <div>{album.artists[0].name}</div>
                                 <div className="artist-played">
                                     <div>{album.total_tracks} songs</div>
                                     <div
                                         className="play"
-                                        onClick={() => {
-                                            setUrl(album.uri);
-                                        }}
+                                        onClick={() =>
+                                            playerDevice.devices[0] ===
+                                            undefined
+                                                ? setUrl(album.uri)
+                                                : play(album.uri)
+                                        }
                                     >
                                         <RiPlayCircleFill />
                                     </div>

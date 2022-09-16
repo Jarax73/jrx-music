@@ -3,11 +3,20 @@ import PropTypes from 'prop-types';
 import axios from 'axios';
 import { RiPlayCircleFill } from 'react-icons/ri';
 
-export default function Tracks({ token, id, setUrl, artistsAlbums }) {
+export default function Tracks({
+    token,
+    id,
+    setUrl,
+    play,
+    playerDevice,
+    artistsAlbums,
+}) {
     Tracks.propTypes = {
         token: PropTypes.string,
         id: PropTypes.string,
+        playerDevice: PropTypes.object,
         setUrl: PropTypes.func,
+        play: PropTypes.func,
         artistsAlbums: PropTypes.array,
     };
     const [tracks, setTracks] = useState([]);
@@ -22,7 +31,7 @@ export default function Tracks({ token, id, setUrl, artistsAlbums }) {
             })
             .then((response) => setTracks(response.data.items));
     }, []);
-    console.log(tracks);
+
     return (
         <div className="section">
             <h2></h2>
@@ -78,9 +87,12 @@ export default function Tracks({ token, id, setUrl, artistsAlbums }) {
                                       </div>
                                       <span
                                           className="play"
-                                          onClick={() => {
-                                              setUrl(track.uri);
-                                          }}
+                                          onClick={() =>
+                                              playerDevice.devices[0] ===
+                                              undefined
+                                                  ? setUrl(track.uri)
+                                                  : play(track.uri)
+                                          }
                                       >
                                           <RiPlayCircleFill />
                                       </span>

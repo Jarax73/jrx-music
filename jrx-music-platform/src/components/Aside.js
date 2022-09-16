@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 export default function Aside({ totalPlaylistTracks }) {
     Aside.propTypes = {
-        totalPlaylistTracks: PropTypes.string,
+        totalPlaylistTracks: PropTypes.number,
         currentlyPlaying: PropTypes.object,
         profile: PropTypes.object,
         logout: PropTypes.func,

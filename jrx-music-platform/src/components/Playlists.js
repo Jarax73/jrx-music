@@ -3,9 +3,17 @@ import PropTypes from 'prop-types';
 import { useState, useEffect } from 'react';
 import { RiPlayCircleFill } from 'react-icons/ri';
 
-export default function Playlists({ token, setUrl, setTotalPlaylistTracks }) {
+export default function Playlists({
+    token,
+    setUrl,
+    play,
+    playerDevice,
+    setTotalPlaylistTracks,
+}) {
     Playlists.propTypes = {
         token: PropTypes.string,
+        playerDevice: PropTypes.object,
+        play: PropTypes.func,
         setUrl: PropTypes.func,
         setTotalPlaylistTracks: PropTypes.func,
     };
@@ -46,9 +54,11 @@ export default function Playlists({ token, setUrl, setTotalPlaylistTracks }) {
                         <div
                             className="artist"
                             key={playlist.id}
-                            onClick={() => {
-                                setUrl(playlist.uri);
-                            }}
+                            onClick={() =>
+                                playerDevice.devices[0] === undefined
+                                    ? setUrl(playlist.uri)
+                                    : play(playlist.uri)
+                            }
                         >
                             {playlist.images.length ? (
                                 <img
@@ -59,11 +69,7 @@ export default function Playlists({ token, setUrl, setTotalPlaylistTracks }) {
                                 <img alt="No image" />
                             )}
 
-                            <div
-                                style={{
-                                    paddingLeft: '10px',
-                                }}
-                            >
+                            <div className="artist-detail">
                                 {playlist.tracks.total > 1 ? (
                                     <>{playlist.tracks.total} songs </>
                                 ) : (
@@ -77,9 +83,11 @@ export default function Playlists({ token, setUrl, setTotalPlaylistTracks }) {
                                 </div>
                                 <div
                                     className="play"
-                                    onClick={() => {
-                                        setUrl(playlist.uri);
-                                    }}
+                                    onClick={() =>
+                                        playerDevice.devices[0] === undefined
+                                            ? setUrl(playlist.uri)
+                                            : play(playlist.uri)
+                                    }
                                 >
                                     <RiPlayCircleFill />
                                 </div>

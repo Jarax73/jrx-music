@@ -2,12 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { RiPlayCircleFill } from 'react-icons/ri';
 
-export default function SearchArtists({ setUrl, artists }) {
+export default function SearchArtists({ setUrl, artists, play, playerDevice }) {
     SearchArtists.propTypes = {
+        playerDevice: PropTypes.object,
+        play: PropTypes.func,
         setUrl: PropTypes.func,
         artists: PropTypes.array,
     };
-    console.log(artists);
+
     const renderArtists = () => {
         return (
             <>
@@ -19,7 +21,11 @@ export default function SearchArtists({ setUrl, artists }) {
                             <div
                                 className="artist"
                                 key={artist.id}
-                                onClick={() => setUrl(artist.uri)}
+                                onClick={() =>
+                                    playerDevice.devices[0] === undefined
+                                        ? setUrl(artist.uri)
+                                        : play(artist.uri)
+                                }
                             >
                                 {artist.images.length ? (
                                     <img src={artist.images[2].url} alt="" />
@@ -34,9 +40,12 @@ export default function SearchArtists({ setUrl, artists }) {
                                     </div>
                                     <div
                                         className="play"
-                                        onClick={() => {
-                                            setUrl(artist.uri);
-                                        }}
+                                        onClick={() =>
+                                            playerDevice.devices[0] ===
+                                            undefined
+                                                ? setUrl(artist.uri)
+                                                : play(artist.uri)
+                                        }
                                     >
                                         <RiPlayCircleFill />
                                     </div>

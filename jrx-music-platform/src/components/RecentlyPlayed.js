@@ -3,10 +3,12 @@ import PropTypes from 'prop-types';
 import axios from 'axios';
 import { RiPlayCircleFill } from 'react-icons/ri';
 
-export default function RecentlyPlayed({ token, setUrl }) {
+export default function RecentlyPlayed({ token, setUrl, play, playerDevice }) {
     RecentlyPlayed.propTypes = {
         token: PropTypes.string,
         setUrl: PropTypes.func,
+        play: PropTypes.func,
+        playerDevice: PropTypes.object,
     };
     const [recentlyPlayed, setRecentlyPlayed] = useState('');
 
@@ -38,9 +40,11 @@ export default function RecentlyPlayed({ token, setUrl }) {
                           <div
                               className="recent-track artist"
                               key={played.track.id}
-                              onClick={() => {
-                                  setUrl(played.track.uri);
-                              }}
+                              onClick={() =>
+                                  playerDevice.devices[0] === undefined
+                                      ? setUrl(played.track.uri)
+                                      : play(played.track.uri)
+                              }
                           >
                               {played.track.album.images.length ? (
                                   <img
@@ -63,9 +67,11 @@ export default function RecentlyPlayed({ token, setUrl }) {
                                   </div>
                                   <div
                                       className="play"
-                                      onClick={() => {
-                                          setUrl(played.track.uri);
-                                      }}
+                                      onClick={() =>
+                                          playerDevice.devices[0] === undefined
+                                              ? setUrl(played.track.uri)
+                                              : play(played.track.uri)
+                                      }
                                   >
                                       <RiPlayCircleFill />
                                   </div>
