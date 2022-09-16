@@ -21,12 +21,12 @@ export default function SearchForm({ token, setUrl }) {
             },
             params: {
                 q: searchKey,
-                type: 'artist',
+                type: 'track,artist',
             },
         });
         setArtists(data.artists.items);
     };
-
+    console.log(artists);
     return (
         <React.Fragment>
             <div className="row">

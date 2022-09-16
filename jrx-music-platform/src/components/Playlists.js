@@ -61,7 +61,7 @@ export default function Playlists({ token, setUrl, setTotalPlaylistTracks }) {
 
                             <div
                                 style={{
-                                    paddingLeft: '5px',
+                                    paddingLeft: '10px',
                                 }}
                             >
                                 {playlist.tracks.total > 1 ? (

@@ -7,7 +7,7 @@ export default function SearchArtists({ setUrl, artists }) {
         setUrl: PropTypes.func,
         artists: PropTypes.array,
     };
-
+    console.log(artists);
     const renderArtists = () => {
         return (
             <>

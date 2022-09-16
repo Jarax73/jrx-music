@@ -59,31 +59,26 @@ export default function Library({ token, setUrl, setId }) {
                                 setId(topArtist.id);
                             }}
                         >
-                            <div>
-                                <div>
-                                    {topArtist.images.length === 0 ? (
-                                        <img alt="No image" />
-                                    ) : (
-                                        <img
-                                            src={topArtist.images[0].url}
-                                            alt={topArtist.name}
-                                        />
-                                    )}
-                                    <div
-                                        style={{
-                                            padding: '5px',
-                                        }}
-                                    >
-                                        <div>{topArtist.name}</div>
-                                        <div className="artist-played">
-                                            <div>
-                                                {topArtist.followers.total}{' '}
-                                                followers
-                                            </div>
-                                        </div>
+                            {/* <div> */}
+                            {/* <div> */}
+                            {topArtist.images.length === 0 ? (
+                                <img alt="No image" />
+                            ) : (
+                                <img
+                                    src={topArtist.images[0].url}
+                                    alt={topArtist.name}
+                                />
+                            )}
+                            <div className="artist-detail">
+                                <div>{topArtist.name}</div>
+                                <div className="artist-played">
+                                    <div>
+                                        {topArtist.followers.total} followers
                                     </div>
                                 </div>
                             </div>
+                            {/* </div> */}
+                            {/* </div> */}
                         </Link>
                     ))
                 )}
@@ -117,7 +112,7 @@ export default function Library({ token, setUrl, setId }) {
                             )}
                             <div
                                 style={{
-                                    padding: '5px',
+                                    padding: '10px',
                                 }}
                             >
                                 <div>{album.name}</div>

@@ -44,22 +44,22 @@ export default function Albums({
                             className="artist"
                             onClick={() => setId(artistsAlbum.id)}
                         >
-                            <div>
-                                <div>
-                                    {artistsAlbum.images.length === 0 ? (
-                                        <img alt="No image" />
-                                    ) : (
-                                        <img src={artistsAlbum.images[0].url} />
-                                    )}
+                            {/* <div>
+                                <div> */}
+                            {artistsAlbum.images.length === 0 ? (
+                                <img alt="No image" />
+                            ) : (
+                                <img src={artistsAlbum.images[0].url} />
+                            )}
+                            {/* </div> */}
+                            <div style={{ padding: '5px' }}>
+                                <div>{artistsAlbum.name}</div>
+                                <div className="artist-played">
+                                    {artistsAlbum.release_date}
                                 </div>
-                                <div style={{ padding: '5px' }}>
-                                    <div>{artistsAlbum.name}</div>
-                                    <div className="artist-played">
-                                        {artistsAlbum.release_date}
-                                    </div>
-                                    <div>{artistsAlbum.total_tracks} songs</div>
-                                </div>
+                                <div>{artistsAlbum.total_tracks} songs</div>
                             </div>
+                            {/* </div> */}
                         </Link>
                     ))
                 )}

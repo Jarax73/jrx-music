@@ -42,10 +42,10 @@ export default function Tracks({ token, id, setUrl, artistsAlbums }) {
                     style={{
                         display: 'flex',
                         flexDirection: 'column',
-                        width: '90%',
+                        width: '81%',
                         height: '100%',
                         marginTop: '30%',
-                        marginLeft: '5%',
+                        marginLeft: '10%',
                     }}
                 >
                     {tracks == []
@@ -60,9 +60,22 @@ export default function Tracks({ token, id, setUrl, artistsAlbums }) {
                                   key={track.id}
                               >
                                   <div className="artist-played">
-                                      <span>{track.track_number}</span>
-                                      <span>{track.name}</span>
-                                      {/* <span>{track.duration_ms}</span> */}
+                                      <div
+                                          style={{
+                                              display: 'flex',
+                                              width: '50%',
+                                              justifyContent: 'space-between',
+                                          }}
+                                      >
+                                          <span>{track.track_number}</span>
+                                          <span
+                                              style={{
+                                                  justifySelf: 'flex-start',
+                                              }}
+                                          >
+                                              {track.name}
+                                          </span>
+                                      </div>
                                       <span
                                           className="play"
                                           onClick={() => {

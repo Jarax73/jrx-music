@@ -10,12 +10,15 @@ import Albums from './components/Albums';
 import Tracks from './components/Tracks';
 import Login from './components/Login';
 import Aside from './components/Aside';
+import Error from './Error';
 import { Routes, Route } from 'react-router-dom';
 import SearchForm from './components/SearchForm';
 
 export default function App() {
-    const clientID = 'af6fe4b7a75e4651bd1531de3f541e53';
-    const redirectUrl = 'https://jrx-music-platform.vercel.app/';
+    // const clientID = 'af6fe4b7a75e4651bd1531de3f541e53';
+    const clientID = '9fd3ef26a5114097853bbdc04f47845e';
+    const redirectUrl = 'http://localhost:3000/';
+    // const redirectUrl = 'https://jrx-music-platform.vercel.app/';
     const apiUrl = 'https://accounts.spotify.com/authorize';
     const responseType = 'token';
     const scope = [
@@ -167,6 +170,7 @@ export default function App() {
                                         />
                                     }
                                 />
+                                <Route path="*" element={<Error />} />
                             </Routes>
                         </div>
                         <Player token={token} url={url} />
