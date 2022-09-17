@@ -4,12 +4,19 @@ import axios from 'axios';
 import React, { useState } from 'react';
 import SearchArtists from './SearchArtists';
 
-export default function SearchForm({ token, setUrl, play, playerDevice }) {
+export default function SearchForm({
+    token,
+    setUrl,
+    play,
+    playerDevice,
+    logout,
+}) {
     SearchForm.propTypes = {
         token: PropTypes.string,
         playerDevice: PropTypes.object,
         play: PropTypes.func,
         setUrl: PropTypes.func,
+        logout: PropTypes.func,
     };
     const [searchKey, setSearchKey] = useState('');
     const [artists, setArtists] = useState([]);
@@ -17,15 +24,19 @@ export default function SearchForm({ token, setUrl, play, playerDevice }) {
     const searchArtists = async (e) => {
         e.preventDefault();
 
-        const { data } = await axios.get('https://api.spotify.com/v1/search', {
-            headers: {
-                Authorization: `Bearer ${token}`,
-            },
-            params: {
-                q: searchKey,
-                type: 'artist',
-            },
-        });
+        const { data } = await axios
+            .get('https://api.spotify.com/v1/search', {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+                params: {
+                    q: searchKey,
+                    type: 'artist',
+                },
+            })
+            .catch((error) =>
+                error.message === 'The access token expired' ? logout() : null
+            );
         setArtists(data.artists.items);
     };
 

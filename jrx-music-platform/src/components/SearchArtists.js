@@ -22,7 +22,7 @@ export default function SearchArtists({ setUrl, artists, play, playerDevice }) {
                                 className="artist"
                                 key={artist.id}
                                 onClick={() =>
-                                    playerDevice.devices[0] === undefined
+                                    playerDevice === undefined
                                         ? setUrl(artist.uri)
                                         : play(artist.uri)
                                 }
@@ -41,8 +41,7 @@ export default function SearchArtists({ setUrl, artists, play, playerDevice }) {
                                     <div
                                         className="play"
                                         onClick={() =>
-                                            playerDevice.devices[0] ===
-                                            undefined
+                                            playerDevice === undefined
                                                 ? setUrl(artist.uri)
                                                 : play(artist.uri)
                                         }

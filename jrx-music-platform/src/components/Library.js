@@ -4,13 +4,21 @@ import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { RiPlayCircleFill } from 'react-icons/ri';
 
-export default function Library({ token, setUrl, play, playerDevice, setId }) {
+export default function Library({
+    token,
+    setUrl,
+    play,
+    playerDevice,
+    setId,
+    logout,
+}) {
     Library.propTypes = {
         token: PropTypes.string,
         playerDevice: PropTypes.object,
         setUrl: PropTypes.func,
         setId: PropTypes.func,
         play: PropTypes.func,
+        logout: PropTypes.func,
     };
     const [albums, setAlbums] = useState('');
     const [topArtists, setTopArtists] = useState([]);
@@ -24,7 +32,10 @@ export default function Library({ token, setUrl, play, playerDevice, setId }) {
                     Authorization: `Bearer ${token}`,
                 },
             })
-            .then((response) => setAlbums(response.data.albums.items));
+            .then((response) => setAlbums(response.data.albums.items))
+            .catch((error) =>
+                error.message === 'The access token expired' ? logout() : null
+            );
 
         axios
             .get('https://api.spotify.com/v1/me/top/artists', {
@@ -34,7 +45,10 @@ export default function Library({ token, setUrl, play, playerDevice, setId }) {
                     Authorization: `Bearer ${token}`,
                 },
             })
-            .then((response) => setTopArtists(response.data.items));
+            .then((response) => setTopArtists(response.data.items))
+            .catch((error) =>
+                error.message === 'The access token expired' ? logout() : null
+            );
     }, []);
 
     return (
@@ -97,7 +111,7 @@ export default function Library({ token, setUrl, play, playerDevice, setId }) {
                             className="artist"
                             key={album.id}
                             onClick={() =>
-                                playerDevice.devices[0] === undefined
+                                playerDevice === undefined
                                     ? setUrl(album.uri)
                                     : play(album.uri)
                             }
@@ -110,16 +124,18 @@ export default function Library({ token, setUrl, play, playerDevice, setId }) {
                             ) : (
                                 <img src={album.images[0].url} alt="No image" />
                             )}
-                            <div className="artist-detail">
-                                <div>{album.name}</div>
-                                <div>{album.artists[0].name}</div>
-                                <div className="artist-played">
+                            <div className="artist-played">
+                                <div className="artist-detail">
+                                    {album.name}
+                                    <br />
+                                    {album.artists[0].name}
                                     <div>{album.total_tracks} songs</div>
+                                </div>
+                                <div>
                                     <div
                                         className="play"
                                         onClick={() =>
-                                            playerDevice.devices[0] ===
-                                            undefined
+                                            playerDevice === undefined
                                                 ? setUrl(album.uri)
                                                 : play(album.uri)
                                         }

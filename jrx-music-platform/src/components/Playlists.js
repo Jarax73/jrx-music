@@ -9,6 +9,7 @@ export default function Playlists({
     play,
     playerDevice,
     setTotalPlaylistTracks,
+    logout,
 }) {
     Playlists.propTypes = {
         token: PropTypes.string,
@@ -16,6 +17,7 @@ export default function Playlists({
         play: PropTypes.func,
         setUrl: PropTypes.func,
         setTotalPlaylistTracks: PropTypes.func,
+        logout: PropTypes.func,
     };
     const [playlists, setPlayLists] = useState([]);
     const total = [];
@@ -33,7 +35,10 @@ export default function Playlists({
                     Authorization: `Bearer ${token}`,
                 },
             })
-            .then((response) => setPlayLists(response.data.items));
+            .then((response) => setPlayLists(response.data.items))
+            .catch((error) =>
+                error.message === 'The access token expired' ? logout() : null
+            );
     }, []);
     setTotalPlaylistTracks(total.reduce((a, b) => a + b, 0));
 
@@ -55,7 +60,7 @@ export default function Playlists({
                             className="artist"
                             key={playlist.id}
                             onClick={() =>
-                                playerDevice.devices[0] === undefined
+                                playerDevice === undefined
                                     ? setUrl(playlist.uri)
                                     : play(playlist.uri)
                             }
@@ -84,7 +89,7 @@ export default function Playlists({
                                 <div
                                     className="play"
                                     onClick={() =>
-                                        playerDevice.devices[0] === undefined
+                                        playerDevice === undefined
                                             ? setUrl(playlist.uri)
                                             : play(playlist.uri)
                                     }

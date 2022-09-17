@@ -9,6 +9,7 @@ export default function Albums({
     artistsAlbums,
     getArtistsAlbums,
     setId,
+    logout,
 }) {
     Albums.propTypes = {
         id: PropTypes.string,
@@ -16,6 +17,7 @@ export default function Albums({
         setId: PropTypes.func,
         artistsAlbums: PropTypes.array,
         getArtistsAlbums: PropTypes.func,
+        logout: PropTypes.func,
     };
 
     useEffect(() => {
@@ -27,7 +29,10 @@ export default function Albums({
                     'Content-Type': 'application/json',
                 },
             })
-            .then((response) => getArtistsAlbums(response.data.items));
+            .then((response) => getArtistsAlbums(response.data.items))
+            .catch((error) =>
+                error.message === 'The access token expired' ? logout() : null
+            );
     }, []);
 
     return (

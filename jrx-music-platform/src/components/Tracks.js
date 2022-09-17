@@ -10,6 +10,7 @@ export default function Tracks({
     play,
     playerDevice,
     artistsAlbums,
+    logout,
 }) {
     Tracks.propTypes = {
         token: PropTypes.string,
@@ -18,6 +19,7 @@ export default function Tracks({
         setUrl: PropTypes.func,
         play: PropTypes.func,
         artistsAlbums: PropTypes.array,
+        logout: PropTypes.func,
     };
     const [tracks, setTracks] = useState([]);
     useEffect(() => {
@@ -29,7 +31,10 @@ export default function Tracks({
                     'Content-type': 'application/json',
                 },
             })
-            .then((response) => setTracks(response.data.items));
+            .then((response) => setTracks(response.data.items))
+            .catch((error) =>
+                error.message === 'The access token expired' ? logout() : null
+            );
     }, []);
 
     return (
@@ -88,8 +93,7 @@ export default function Tracks({
                                       <span
                                           className="play"
                                           onClick={() =>
-                                              playerDevice.devices[0] ===
-                                              undefined
+                                              playerDevice === undefined
                                                   ? setUrl(track.uri)
                                                   : play(track.uri)
                                           }

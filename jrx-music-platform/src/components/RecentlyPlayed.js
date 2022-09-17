@@ -3,12 +3,19 @@ import PropTypes from 'prop-types';
 import axios from 'axios';
 import { RiPlayCircleFill } from 'react-icons/ri';
 
-export default function RecentlyPlayed({ token, setUrl, play, playerDevice }) {
+export default function RecentlyPlayed({
+    token,
+    setUrl,
+    play,
+    playerDevice,
+    logout,
+}) {
     RecentlyPlayed.propTypes = {
         token: PropTypes.string,
         setUrl: PropTypes.func,
         play: PropTypes.func,
         playerDevice: PropTypes.object,
+        logout: PropTypes.func,
     };
     const [recentlyPlayed, setRecentlyPlayed] = useState('');
 
@@ -25,7 +32,9 @@ export default function RecentlyPlayed({ token, setUrl, play, playerDevice }) {
                 }
             )
             .then((response) => setRecentlyPlayed(response.data.items))
-            .catch((error) => error);
+            .catch((error) =>
+                error.message === 'The access token expired' ? logout() : null
+            );
     }, []);
 
     return (
@@ -41,7 +50,7 @@ export default function RecentlyPlayed({ token, setUrl, play, playerDevice }) {
                               className="recent-track artist"
                               key={played.track.id}
                               onClick={() =>
-                                  playerDevice.devices[0] === undefined
+                                  playerDevice === undefined
                                       ? setUrl(played.track.uri)
                                       : play(played.track.uri)
                               }
@@ -68,7 +77,7 @@ export default function RecentlyPlayed({ token, setUrl, play, playerDevice }) {
                                   <div
                                       className="play"
                                       onClick={() =>
-                                          playerDevice.devices[0] === undefined
+                                          playerDevice === undefined
                                               ? setUrl(played.track.uri)
                                               : play(played.track.uri)
                                       }
