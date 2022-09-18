@@ -37,7 +37,7 @@ export default function App() {
     const [token, setToken] = useState('');
     const [profile, setProfile] = useState({});
     const [url, setUrl] = useState('');
-    const [totalPlaylistTracks, setTotalPlaylistTracks] = useState('');
+    const [totalPlaylistTracks, setTotalPlaylistTracks] = useState(0);
     const [id, setId] = useState('');
     const [artistsAlbums, getArtistsAlbums] = useState([]);
 
