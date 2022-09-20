@@ -2,11 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { RiPlayCircleFill } from 'react-icons/ri';
 
-export default function SearchArtists({ setUrl, artists, play, playerDevice }) {
+export default function SearchArtists({ artists, play, playerDevice }) {
     SearchArtists.propTypes = {
         playerDevice: PropTypes.object,
         play: PropTypes.func,
-        setUrl: PropTypes.func,
         artists: PropTypes.array,
     };
 
@@ -21,11 +20,7 @@ export default function SearchArtists({ setUrl, artists, play, playerDevice }) {
                             <div
                                 className="artist"
                                 key={artist.id}
-                                onClick={() =>
-                                    playerDevice === undefined
-                                        ? setUrl(artist.uri)
-                                        : play(artist.uri)
-                                }
+                                onClick={() => play(artist.uri, playerDevice)}
                             >
                                 {artist.images.length ? (
                                     <img src={artist.images[2].url} alt="" />
@@ -41,9 +36,7 @@ export default function SearchArtists({ setUrl, artists, play, playerDevice }) {
                                     <div
                                         className="play"
                                         onClick={() =>
-                                            playerDevice === undefined
-                                                ? setUrl(artist.uri)
-                                                : play(artist.uri)
+                                            play(artist.uri, playerDevice)
                                         }
                                     >
                                         <RiPlayCircleFill />

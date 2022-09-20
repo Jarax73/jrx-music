@@ -4,18 +4,10 @@ import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { RiPlayCircleFill } from 'react-icons/ri';
 
-export default function Library({
-    token,
-    setUrl,
-    play,
-    playerDevice,
-    setId,
-    logout,
-}) {
+export default function Library({ token, play, playerDevice, setId, logout }) {
     Library.propTypes = {
         token: PropTypes.string,
         playerDevice: PropTypes.object,
-        setUrl: PropTypes.func,
         setId: PropTypes.func,
         play: PropTypes.func,
         logout: PropTypes.func,
@@ -110,11 +102,7 @@ export default function Library({
                         <div
                             className="artist"
                             key={album.id}
-                            onClick={() =>
-                                playerDevice === undefined
-                                    ? setUrl(album.uri)
-                                    : play(album.uri)
-                            }
+                            onClick={() => play(album.uri)}
                         >
                             {album.images.length ? (
                                 <img
@@ -135,9 +123,7 @@ export default function Library({
                                     <div
                                         className="play"
                                         onClick={() =>
-                                            playerDevice === undefined
-                                                ? setUrl(album.uri)
-                                                : play(album.uri)
+                                            play(album.uri, playerDevice)
                                         }
                                     >
                                         <RiPlayCircleFill />

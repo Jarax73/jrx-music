@@ -3,16 +3,9 @@ import PropTypes from 'prop-types';
 import axios from 'axios';
 import { RiPlayCircleFill } from 'react-icons/ri';
 
-export default function RecentlyPlayed({
-    token,
-    setUrl,
-    play,
-    playerDevice,
-    logout,
-}) {
+export default function RecentlyPlayed({ token, play, playerDevice, logout }) {
     RecentlyPlayed.propTypes = {
         token: PropTypes.string,
-        setUrl: PropTypes.func,
         play: PropTypes.func,
         playerDevice: PropTypes.object,
         logout: PropTypes.func,
@@ -50,9 +43,7 @@ export default function RecentlyPlayed({
                               className="recent-track artist"
                               key={played.track.id}
                               onClick={() =>
-                                  playerDevice === undefined
-                                      ? setUrl(played.track.uri)
-                                      : play(played.track.uri)
+                                  play(played.track.uri, playerDevice)
                               }
                           >
                               {played.track.album.images.length ? (
@@ -77,9 +68,7 @@ export default function RecentlyPlayed({
                                   <div
                                       className="play"
                                       onClick={() =>
-                                          playerDevice === undefined
-                                              ? setUrl(played.track.uri)
-                                              : play(played.track.uri)
+                                          play(played.track.uri, playerDevice)
                                       }
                                   >
                                       <RiPlayCircleFill />

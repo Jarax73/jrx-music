@@ -13,7 +13,7 @@ const Player = ({ token, url }) => {
     useEffect(() => {
         setPlay(true);
     }, [url]);
-    console.log(url);
+
     if (!token) return null;
     return (
         <div className="player-container">

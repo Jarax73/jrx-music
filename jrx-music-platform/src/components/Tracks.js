@@ -6,7 +6,6 @@ import { RiPlayCircleFill } from 'react-icons/ri';
 export default function Tracks({
     token,
     id,
-    setUrl,
     play,
     playerDevice,
     artistsAlbums,
@@ -16,7 +15,6 @@ export default function Tracks({
         token: PropTypes.string,
         id: PropTypes.string,
         playerDevice: PropTypes.object,
-        setUrl: PropTypes.func,
         play: PropTypes.func,
         artistsAlbums: PropTypes.array,
         logout: PropTypes.func,
@@ -93,9 +91,7 @@ export default function Tracks({
                                       <span
                                           className="play"
                                           onClick={() =>
-                                              playerDevice === undefined
-                                                  ? setUrl(track.uri)
-                                                  : play(track.uri)
+                                              play(track.uri, playerDevice)
                                           }
                                       >
                                           <RiPlayCircleFill />

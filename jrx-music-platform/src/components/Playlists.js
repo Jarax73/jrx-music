@@ -5,7 +5,6 @@ import { RiPlayCircleFill } from 'react-icons/ri';
 
 export default function Playlists({
     token,
-    setUrl,
     play,
     playerDevice,
     setTotalPlaylistTracks,
@@ -15,7 +14,6 @@ export default function Playlists({
         token: PropTypes.string,
         playerDevice: PropTypes.object,
         play: PropTypes.func,
-        setUrl: PropTypes.func,
         setTotalPlaylistTracks: PropTypes.func,
         logout: PropTypes.func,
     };
@@ -59,11 +57,7 @@ export default function Playlists({
                         <div
                             className="artist"
                             key={playlist.id}
-                            onClick={() =>
-                                playerDevice === undefined
-                                    ? setUrl(playlist.uri)
-                                    : play(playlist.uri)
-                            }
+                            onClick={() => play(playlist.uri, playerDevice)}
                         >
                             {playlist.images.length ? (
                                 <img
@@ -89,9 +83,7 @@ export default function Playlists({
                                 <div
                                     className="play"
                                     onClick={() =>
-                                        playerDevice === undefined
-                                            ? setUrl(playlist.uri)
-                                            : play(playlist.uri)
+                                        play(playlist.uri, playerDevice)
                                     }
                                 >
                                     <RiPlayCircleFill />

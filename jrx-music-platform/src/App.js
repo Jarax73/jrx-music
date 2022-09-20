@@ -15,10 +15,8 @@ import { Routes, Route } from 'react-router-dom';
 import SearchForm from './components/SearchForm';
 
 export default function App() {
-    // const clientID = 'af6fe4b7a75e4651bd1531de3f541e53';
-    const clientID = '9fd3ef26a5114097853bbdc04f47845e';
-    const redirectUrl = 'http://localhost:3000/';
-    // const redirectUrl = 'https://jrx-music-platform.vercel.app/';
+    const clientID = 'af6fe4b7a75e4651bd1531de3f541e53';
+    const redirectUrl = 'https://jrx-music-platform.vercel.app/';
     const apiUrl = 'https://accounts.spotify.com/authorize';
     const responseType = 'token';
     const scope = [
@@ -40,6 +38,7 @@ export default function App() {
     const [totalPlaylistTracks, setTotalPlaylistTracks] = useState(0);
     const [id, setId] = useState('');
     const [artistsAlbums, getArtistsAlbums] = useState([]);
+    const [playerDevice, setPlayerDevice] = useState({});
 
     useEffect(() => {
         const hash = window.location.hash;
@@ -55,6 +54,19 @@ export default function App() {
             window.localStorage.setItem('token', token);
         }
         setToken(token);
+
+        axios
+            .get('https://api.spotify.com/v1/me/player/devices', {
+                headers: {
+                    Accept: 'application/json',
+                    'content-type': 'application/json',
+                    Authorization: `Bearer ${token}`,
+                },
+            })
+            .then((response) => setPlayerDevice(response.data))
+            .catch((error) =>
+                error.message === 'The access token expired' ? logout() : null
+            );
 
         axios
             .get('https://api.spotify.com/v1/me', {
@@ -81,6 +93,30 @@ export default function App() {
         window.localStorage.removeItem('token');
     };
 
+    function play(url, playerDevice) {
+        if (playerDevice === {}) {
+            if (Array.isArray(playerDevice.devices)) {
+                playerDevice.devices.map((player) => {
+                    fetch(
+                        `https://api.spotify.com/v1/me/player/play?device_id=${player.id}`,
+                        {
+                            method: 'PUT',
+                            body: JSON.stringify({
+                                uris: [url],
+                            }),
+                            headers: {
+                                'Content-Type': 'application/json',
+                                Authorization: `Bearer ${token}`,
+                            },
+                        }
+                    );
+                });
+            }
+        } else {
+            setUrl(url, playerDevice === undefined);
+        }
+    }
+
     return (
         <div className="container">
             {!token ? (
@@ -97,7 +133,8 @@ export default function App() {
                                         <SearchForm
                                             token={token}
                                             setUrl={setUrl}
-                                            logout={logout}
+                                            play={play}
+                                            playerDevice={playerDevice}
                                         />
                                     }
                                 />
@@ -107,10 +144,9 @@ export default function App() {
                                     element={
                                         <Home
                                             token={token}
-                                            logout={logout}
-                                            profile={profile}
                                             setUrl={setUrl}
-                                            url={url}
+                                            playerDevice={playerDevice}
+                                            play={play}
                                         />
                                     }
                                 />
@@ -120,8 +156,9 @@ export default function App() {
                                         <Library
                                             token={token}
                                             setUrl={setUrl}
+                                            play={play}
+                                            playerDevice={playerDevice}
                                             setId={setId}
-                                            logout={logout}
                                         />
                                     }
                                 />
@@ -131,10 +168,11 @@ export default function App() {
                                         <Playlists
                                             token={token}
                                             setUrl={setUrl}
+                                            play={play}
+                                            playerDevice={playerDevice}
                                             setTotalPlaylistTracks={
                                                 setTotalPlaylistTracks
                                             }
-                                            logout={logout}
                                         />
                                     }
                                 />
@@ -147,7 +185,6 @@ export default function App() {
                                             setId={setId}
                                             artistsAlbums={artistsAlbums}
                                             getArtistsAlbums={getArtistsAlbums}
-                                            logout={logout}
                                         />
                                     }
                                 />
@@ -158,15 +195,20 @@ export default function App() {
                                             token={token}
                                             id={id}
                                             setUrl={setUrl}
+                                            play={play}
+                                            playerDevice={playerDevice}
                                             artistsAlbums={artistsAlbums}
-                                            logout={logout}
                                         />
                                     }
                                 />
                                 <Route path="*" element={<Error />} />
                             </Routes>
                         </div>
-                        <Player token={token} url={url} />
+                        <Player
+                            token={token}
+                            url={url}
+                            playerDevice={playerDevice}
+                        />
                     </div>
                     <Aside
                         totalPlaylistTracks={totalPlaylistTracks}
