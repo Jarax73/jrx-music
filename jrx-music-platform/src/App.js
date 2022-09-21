@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 /* eslint-disable indent */
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
@@ -16,7 +17,10 @@ import SearchForm from './components/SearchForm';
 
 export default function App() {
     const clientID = 'af6fe4b7a75e4651bd1531de3f541e53';
-    const redirectUrl = 'https://jrx-music-platform.vercel.app/';
+    const redirectUrl =
+        process.env.NODE_ENV === 'production'
+            ? process.env.REACT_APP_PROD_URL
+            : process.env.REACT_APP_DEV_URL;
     const apiUrl = 'https://accounts.spotify.com/authorize';
     const responseType = 'token';
     const scope = [
@@ -91,6 +95,7 @@ export default function App() {
     const logout = () => {
         setToken(null);
         window.localStorage.removeItem('token');
+        window.location = redirectUrl + 'login';
     };
 
     function play(url, playerDevice) {
@@ -120,7 +125,12 @@ export default function App() {
     return (
         <div className="container">
             {!token ? (
-                <Login handleClick={handleClick} />
+                <Routes>
+                    <Route
+                        path="/login"
+                        element={<Login handleClick={handleClick} />}
+                    />
+                </Routes>
             ) : (
                 <React.Fragment>
                     <Menu logout={logout} profile={profile} />
