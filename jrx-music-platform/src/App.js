@@ -12,7 +12,7 @@ import Tracks from './components/Tracks';
 import Login from './components/Login';
 import Aside from './components/Aside';
 import Error from './Error';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Link } from 'react-router-dom';
 import SearchForm from './components/SearchForm';
 
 export default function App() {
@@ -95,7 +95,7 @@ export default function App() {
     const logout = () => {
         setToken(null);
         window.localStorage.removeItem('token');
-        window.location = redirectUrl + 'login';
+        toLog;
     };
 
     function play(url, playerDevice) {
@@ -121,16 +121,22 @@ export default function App() {
             setUrl(url, playerDevice === undefined);
         }
     }
+    const toLog = (
+        <Link to="/login" style={{ textDecoration: 'none' }}>
+            <Login handleClick={handleClick} />
+        </Link>
+    );
 
     return (
         <div className="container">
             {!token ? (
-                <Routes>
-                    <Route
-                        path="/login"
-                        element={<Login handleClick={handleClick} />}
-                    />
-                </Routes>
+                <div
+                    style={{
+                        margin: 'auto',
+                    }}
+                >
+                    {toLog}
+                </div>
             ) : (
                 <React.Fragment>
                     <Menu logout={logout} profile={profile} />
@@ -211,6 +217,14 @@ export default function App() {
                                         />
                                     }
                                 />
+
+                                <Route
+                                    path="/login"
+                                    element={
+                                        <Login handleClick={handleClick} />
+                                    }
+                                />
+
                                 <Route path="*" element={<Error />} />
                             </Routes>
                         </div>

@@ -15,7 +15,9 @@ export default function Login({ handleClick }) {
                     margin: '5% auto',
                 }}
             >
-                <h1 style={{ width: '400px' }}>Welcome to Jrx Music by </h1>
+                <h1 style={{ width: '400px', color: '#000' }}>
+                    Welcome to Jrx Music by
+                </h1>
                 <div>
                     <img
                         src="https://storage.googleapis.com/pr-newsroom-wp/1/2018/11/Spotify_Logo_CMYK_Black.png"
@@ -34,7 +36,7 @@ export default function Login({ handleClick }) {
             >
                 Connect to Spotify
             </button>
-            <h2>Please login</h2>
+            <h2 style={{ color: '#000' }}>Please login</h2>
         </div>
     );
 }
