@@ -6,7 +6,7 @@ export default function Error() {
             <img
                 style={{
                     margin: 'auto',
-                    height: '120%',
+                    height: '100%',
                 }}
                 src={ErrorImage}
                 alt="Error"
