@@ -4,11 +4,10 @@ import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { RiPlayCircleFill } from 'react-icons/ri';
 
-export default function Library({ token, play, playerDevice, setId, logout }) {
+export default function Library({ token, play, playerDevice, logout }) {
     Library.propTypes = {
         token: PropTypes.string,
         playerDevice: PropTypes.object,
-        setId: PropTypes.func,
         play: PropTypes.func,
         logout: PropTypes.func,
     };
@@ -60,12 +59,9 @@ export default function Library({ token, play, playerDevice, setId, logout }) {
                 ) : (
                     topArtists.map((topArtist) => (
                         <Link
-                            to="/Albums"
+                            to={`/Albums/${topArtist.id}`}
                             key={topArtist.id}
                             className="artist"
-                            onClick={() => {
-                                setId(topArtist.id);
-                            }}
                         >
                             {topArtist.images.length === 0 ? (
                                 <img alt="No image" />

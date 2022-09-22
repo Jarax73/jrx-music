@@ -1,28 +1,28 @@
 import { useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
 export default function Albums({
-    id,
     token,
     artistsAlbums,
     getArtistsAlbums,
-    setId,
     logout,
 }) {
     Albums.propTypes = {
         id: PropTypes.string,
         token: PropTypes.string,
-        setId: PropTypes.func,
         artistsAlbums: PropTypes.array,
         getArtistsAlbums: PropTypes.func,
         logout: PropTypes.func,
     };
 
+    let { artistId } = useParams();
+
     useEffect(() => {
         axios
-            .get(`https://api.spotify.com/v1/artists/${id}/albums`, {
+            .get(`https://api.spotify.com/v1/artists/${artistId}/albums`, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                     Accept: 'application/json',
@@ -44,10 +44,9 @@ export default function Albums({
                 ) : (
                     artistsAlbums.map((artistsAlbum) => (
                         <Link
-                            to="/Tracks"
+                            to={`/Tracks/${artistsAlbum.id}`}
                             key={artistsAlbum.id}
                             className="artist"
-                            onClick={() => setId(artistsAlbum.id)}
                         >
                             {artistsAlbum.images.length === 0 ? (
                                 <img alt="No image" />

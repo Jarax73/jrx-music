@@ -40,7 +40,6 @@ export default function App() {
     const [profile, setProfile] = useState({});
     const [url, setUrl] = useState('');
     const [totalPlaylistTracks, setTotalPlaylistTracks] = useState(0);
-    const [id, setId] = useState('');
     const [artistsAlbums, getArtistsAlbums] = useState([]);
     const [playerDevice, setPlayerDevice] = useState({});
 
@@ -174,7 +173,6 @@ export default function App() {
                                             setUrl={setUrl}
                                             play={play}
                                             playerDevice={playerDevice}
-                                            setId={setId}
                                         />
                                     }
                                 />
@@ -193,23 +191,20 @@ export default function App() {
                                     }
                                 />
                                 <Route
-                                    path="/Albums"
+                                    path="/Albums/:artistId"
                                     element={
                                         <Albums
                                             token={token}
-                                            id={id}
-                                            setId={setId}
                                             artistsAlbums={artistsAlbums}
                                             getArtistsAlbums={getArtistsAlbums}
                                         />
                                     }
                                 />
                                 <Route
-                                    path="/Tracks"
+                                    path="/Tracks/:albumId"
                                     element={
                                         <Tracks
                                             token={token}
-                                            id={id}
                                             setUrl={setUrl}
                                             play={play}
                                             playerDevice={playerDevice}
