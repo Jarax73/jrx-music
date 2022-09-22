@@ -132,9 +132,19 @@ button {
   cursor: pointer;
 }
 .artist-played{
+  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+.track
+{
+  width: 100%;
+  height: 50px;
+}
+.track:hover{
+  border: 0px solid #05476b;
+  background-color: #05476b;
 }
 .tracks{
   width: 80%;

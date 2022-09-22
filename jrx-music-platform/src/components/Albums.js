@@ -51,7 +51,7 @@ export default function Albums({
                 {artist.length === 0 ? (
                     <div style={{ margin: 'auto' }}></div>
                 ) : (
-                    <div style={{ width: '100%', marginLeft: '50px' }}>
+                    <div style={{ width: '100%', marginLeft: '35px' }}>
                         {`${artist.name}'s albums`}
                     </div>
                 )}

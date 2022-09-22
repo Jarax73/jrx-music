@@ -51,7 +51,6 @@ export default function Tracks({ token, play, playerDevice, logout }) {
                     flexDirection: 'column',
                     justifyContent: 'space-between',
                     width: '100%',
-                    // height: '100%',
                 }}
             >
                 <div className="tracks">
@@ -71,7 +70,7 @@ export default function Tracks({ token, play, playerDevice, logout }) {
                         )}
                     </h2>
                     {album.length === 0 ? (
-                        <div>Waiting</div>
+                        <div style={{ maring: 'auto' }}>Waiting</div>
                     ) : (
                         <div>
                             <img src={album.images[0].url} />
@@ -82,24 +81,21 @@ export default function Tracks({ token, play, playerDevice, logout }) {
                     style={{
                         display: 'flex',
                         flexDirection: 'column',
-                        width: '81%',
+                        width: '100%',
                         height: '100%',
-                        marginTop: '0%',
-                        marginLeft: '10%',
                     }}
                 >
                     {tracks == []
                         ? 'Nothing yet ...'
                         : tracks.map((track) => (
-                              <div
-                                  style={{
-                                      width: '100%',
-                                      height: '100px',
-                                      margin: 'auto',
-                                  }}
-                                  key={track.id}
-                              >
-                                  <div className="artist-played">
+                              <div className="track" key={track.id}>
+                                  <div
+                                      className="artist-played"
+                                      style={{
+                                          width: '82%',
+                                          margin: '0 auto',
+                                      }}
+                                  >
                                       <div>
                                           <span>{track.track_number}</span>
                                           {'. '}
