@@ -116,8 +116,14 @@ button {
   border-radius: 20px;
   margin: auto;
   width: 80%;
-  height: 450%;
-  object-fit: cover;
+  height: 100%;
+  object-fit: contain;
+}
+.tracks div{
+  display: inline-block;
+  height: 160%;
+  padding:0;
+  margin:0;
 }
 .play{
   margin-right: 10px;
@@ -131,16 +137,18 @@ button {
   align-items: center;
 }
 .tracks{
-  width: 100%;
+  width: 80%;
+  margin: 10% auto;
+  color: #cecece;
+  background: linear-gradient(#05476b, #000);
+  border-radius: 10px;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  margin-bottom: 1%;
-  height: 6vh;
+  height: 40vh;
+  border: 1px solid linear-gradient(#05476b, #000);
 }
-.track-organized{
-  display:  flex;
-}
+
 .library{
   width: 100%;
   display: flex;

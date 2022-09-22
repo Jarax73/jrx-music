@@ -45,35 +45,37 @@ export default function Tracks({ token, play, playerDevice, logout }) {
 
     return (
         <div className="section">
-            <h2
-                style={{
-                    width: '80%',
-                    marginLeft: '10%',
-                    wordWrap: 'break-word',
-                }}
-            >
-                {album.length === 0 ? (
-                    <div style={{ margin: 'auto' }}></div>
-                ) : (
-                    <div>
-                        {album.name} ({album.artists[0].name})
-                    </div>
-                )}
-            </h2>
             <div
                 style={{
                     display: 'flex',
                     flexDirection: 'column',
                     justifyContent: 'space-between',
                     width: '100%',
-                    height: '100%',
+                    // height: '100%',
                 }}
             >
                 <div className="tracks">
+                    <h2
+                        style={{
+                            width: '80%',
+                            marginLeft: '10%',
+                            wordWrap: 'break-word',
+                        }}
+                    >
+                        {album.length === 0 ? (
+                            <div style={{ margin: 'auto' }}></div>
+                        ) : (
+                            <div>
+                                {album.name} ({album.artists[0].name})
+                            </div>
+                        )}
+                    </h2>
                     {album.length === 0 ? (
-                        <div style={{ margin: 'auto' }}>Waiting</div>
+                        <div>Waiting</div>
                     ) : (
-                        <img src={album.images[0].url} />
+                        <div>
+                            <img src={album.images[0].url} />
+                        </div>
                     )}
                 </div>
                 <div
@@ -82,7 +84,7 @@ export default function Tracks({ token, play, playerDevice, logout }) {
                         flexDirection: 'column',
                         width: '81%',
                         height: '100%',
-                        marginTop: '30%',
+                        marginTop: '0%',
                         marginLeft: '10%',
                     }}
                 >
