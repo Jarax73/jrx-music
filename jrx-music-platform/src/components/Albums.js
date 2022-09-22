@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import axios from 'axios';
@@ -18,6 +18,7 @@ export default function Albums({
         logout: PropTypes.func,
     };
 
+    const [artist, setArtist] = useState([]);
     let { artistId } = useParams();
 
     useEffect(() => {
@@ -33,11 +34,28 @@ export default function Albums({
             .catch((error) =>
                 error.message === 'The access token expired' ? logout() : null
             );
+        axios
+            .get(`https://api.spotify.com/v1/artists/${artistId}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    Accept: 'application/json',
+                    'Content-type': 'application/json',
+                },
+            })
+            .then((response) => setArtist(response.data));
     }, []);
 
     return (
         <div className="section">
-            {<h2 style={{ marginLeft: '5%', marginTop: '10%' }}></h2>}
+            <h2>
+                {artist.length === 0 ? (
+                    <div style={{ margin: 'auto' }}></div>
+                ) : (
+                    <div style={{ width: '100%', marginLeft: '50px' }}>
+                        {`${artist.name}'s albums`}
+                    </div>
+                )}
+            </h2>
             <div className="render-artists">
                 {artistsAlbums == [] ? (
                     <div>Nothing yet ...</div>

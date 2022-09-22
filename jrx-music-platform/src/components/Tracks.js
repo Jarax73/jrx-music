@@ -45,11 +45,17 @@ export default function Tracks({ token, play, playerDevice, logout }) {
 
     return (
         <div className="section">
-            <h2>
+            <h2
+                style={{
+                    width: '80%',
+                    marginLeft: '10%',
+                    wordWrap: 'break-word',
+                }}
+            >
                 {album.length === 0 ? (
                     <div style={{ margin: 'auto' }}></div>
                 ) : (
-                    <div style={{ width: '100%', marginLeft: '130px' }}>
+                    <div>
                         {album.name} ({album.artists[0].name})
                     </div>
                 )}
@@ -92,21 +98,10 @@ export default function Tracks({ token, play, playerDevice, logout }) {
                                   key={track.id}
                               >
                                   <div className="artist-played">
-                                      <div
-                                          style={{
-                                              display: 'flex',
-                                              width: '50%',
-                                              justifyContent: 'space-between',
-                                          }}
-                                      >
+                                      <div>
                                           <span>{track.track_number}</span>
-                                          <span
-                                              style={{
-                                                  justifySelf: 'flex-start',
-                                              }}
-                                          >
-                                              {track.name}
-                                          </span>
+                                          {'. '}
+                                          <span>{track.name}</span>
                                       </div>
                                       <span
                                           className="play"
