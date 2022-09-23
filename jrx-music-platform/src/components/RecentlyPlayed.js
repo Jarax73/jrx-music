@@ -1,16 +1,17 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import { RiPlayCircleFill } from 'react-icons/ri';
+import { AppContext } from '../App';
 
-export default function RecentlyPlayed({ token, play, playerDevice, logout }) {
+export default function RecentlyPlayed({ play, playerDevice, logout }) {
     RecentlyPlayed.propTypes = {
-        token: PropTypes.string,
         play: PropTypes.func,
         playerDevice: PropTypes.object,
         logout: PropTypes.func,
     };
     const [recentlyPlayed, setRecentlyPlayed] = useState('');
+    const token = useContext(AppContext);
 
     useEffect(() => {
         axios
@@ -37,7 +38,7 @@ export default function RecentlyPlayed({ token, play, playerDevice, logout }) {
             </h2>
             <div className="render-artists">
                 {recentlyPlayed == ''
-                    ? 'Nothing yet ...'
+                    ? 'Nothing yet...'
                     : recentlyPlayed.map((played) => (
                           <div
                               className="recent-track artist"

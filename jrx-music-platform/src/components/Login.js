@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 export default function Login({ handleClick }) {
     Login.propTypes = {
@@ -28,13 +29,17 @@ export default function Login({ handleClick }) {
             <button
                 style={{
                     border: 'none',
-                    color: '#2679a7',
                     fontWeight: 'bold',
                     boxShadow: '0px 2px 20px #a9a9a9',
                 }}
                 onClick={handleClick}
             >
-                Connect to Spotify
+                <Link
+                    to="/login"
+                    style={{ textDecoration: 'none', color: '#2679a7' }}
+                >
+                    Connect to Spotify
+                </Link>
             </button>
             <h2 style={{ color: '#000' }}>Please login</h2>
         </div>

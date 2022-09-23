@@ -1,18 +1,16 @@
 import axios from 'axios';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { useState, useEffect } from 'react';
-import { RiPlayCircleFill } from 'react-icons/ri';
+import { useState, useEffect, useContext } from 'react';
+import { AppContext } from '../App';
 
-export default function Library({ token, play, playerDevice, logout }) {
+export default function Library({ logout }) {
     Library.propTypes = {
-        token: PropTypes.string,
-        playerDevice: PropTypes.object,
-        play: PropTypes.func,
         logout: PropTypes.func,
     };
     const [albums, setAlbums] = useState('');
     const [topArtists, setTopArtists] = useState([]);
+    const token = useContext(AppContext);
 
     useEffect(() => {
         axios
@@ -95,10 +93,10 @@ export default function Library({ token, play, playerDevice, logout }) {
                     </div>
                 ) : (
                     albums.map((album) => (
-                        <div
-                            className="artist"
+                        <Link
+                            to={`/Tracks/${album.id}`}
                             key={album.id}
-                            onClick={() => play(album.uri)}
+                            className="artist"
                         >
                             {album.images.length ? (
                                 <img
@@ -115,18 +113,8 @@ export default function Library({ token, play, playerDevice, logout }) {
                                     {album.artists[0].name}
                                     <div>{album.total_tracks} songs</div>
                                 </div>
-                                <div>
-                                    <div
-                                        className="play"
-                                        onClick={() =>
-                                            play(album.uri, playerDevice)
-                                        }
-                                    >
-                                        <RiPlayCircleFill />
-                                    </div>
-                                </div>
                             </div>
-                        </div>
+                        </Link>
                     ))
                 )}
             </div>

@@ -1,10 +1,8 @@
-import React from 'react';
 import RecentlyPlayed from './RecentlyPlayed';
 import PropTypes from 'prop-types';
 
-export default function Home({ token, setUrl, play, playerDevice, logout }) {
+export default function Home({ setUrl, play, playerDevice, logout }) {
     Home.propTypes = {
-        token: PropTypes.string,
         playerDevice: PropTypes.object,
         setUrl: PropTypes.func,
         play: PropTypes.func,
@@ -12,7 +10,6 @@ export default function Home({ token, setUrl, play, playerDevice, logout }) {
     };
     return (
         <RecentlyPlayed
-            token={token}
             setUrl={setUrl}
             play={play}
             playerDevice={playerDevice}

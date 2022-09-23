@@ -13,38 +13,36 @@ export default function SearchArtists({ artists, play, playerDevice }) {
         return (
             <>
                 <div className="render-artists" style={{ marginTop: '5%' }}>
-                    {artists === [] ? (
-                        <div></div>
-                    ) : (
-                        artists.map((artist) => (
-                            <div
-                                className="artist"
-                                key={artist.id}
-                                onClick={() => play(artist.uri, playerDevice)}
-                            >
-                                {artist.images.length ? (
-                                    <img src={artist.images[2].url} alt="" />
-                                ) : (
-                                    <div>No image</div>
-                                )}
-                                <div className="artist-played">
-                                    <div className="artist-detail">
-                                        {artist.name}
-                                        <br />
-                                        {artist.genres[0]}
-                                    </div>
-                                    <div
-                                        className="play"
-                                        onClick={() =>
-                                            play(artist.uri, playerDevice)
-                                        }
-                                    >
-                                        <RiPlayCircleFill />
-                                    </div>
-                                </div>
-                            </div>
-                        ))
-                    )}
+                    {artists === ''
+                        ? 'Nothing yet...'
+                        : artists.map((artist) => (
+                              <div
+                                  className="artist"
+                                  key={artist.id}
+                                  onClick={() => play(artist.uri, playerDevice)}
+                              >
+                                  {artist.images.length ? (
+                                      <img src={artist.images[2].url} alt="" />
+                                  ) : (
+                                      <div>No image</div>
+                                  )}
+                                  <div className="artist-played">
+                                      <div className="artist-detail">
+                                          {artist.name}
+                                          <br />
+                                          {artist.genres[0]}
+                                      </div>
+                                      <div
+                                          className="play"
+                                          onClick={() =>
+                                              play(artist.uri, playerDevice)
+                                          }
+                                      >
+                                          <RiPlayCircleFill />
+                                      </div>
+                                  </div>
+                              </div>
+                          ))}
                 </div>
             </>
         );

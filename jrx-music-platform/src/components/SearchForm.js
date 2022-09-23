@@ -1,18 +1,12 @@
 import PropTypes from 'prop-types';
 import { RiSearch2Line } from 'react-icons/ri';
 import axios from 'axios';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import SearchArtists from './SearchArtists';
+import { AppContext } from '../App';
 
-export default function SearchForm({
-    token,
-    setUrl,
-    play,
-    playerDevice,
-    logout,
-}) {
+export default function SearchForm({ setUrl, play, playerDevice, logout }) {
     SearchForm.propTypes = {
-        token: PropTypes.string,
         playerDevice: PropTypes.object,
         play: PropTypes.func,
         setUrl: PropTypes.func,
@@ -20,6 +14,7 @@ export default function SearchForm({
     };
     const [searchKey, setSearchKey] = useState('');
     const [artists, setArtists] = useState([]);
+    const token = useContext(AppContext);
 
     const searchArtists = async (e) => {
         e.preventDefault();

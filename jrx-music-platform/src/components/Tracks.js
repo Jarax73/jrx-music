@@ -1,12 +1,12 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import { RiPlayCircleFill } from 'react-icons/ri';
+import { AppContext } from '../App';
 
-export default function Tracks({ token, play, playerDevice, logout }) {
+export default function Tracks({ play, playerDevice, logout }) {
     Tracks.propTypes = {
-        token: PropTypes.string,
         playerDevice: PropTypes.object,
         play: PropTypes.func,
         logout: PropTypes.func,
@@ -14,6 +14,7 @@ export default function Tracks({ token, play, playerDevice, logout }) {
 
     const [tracks, setTracks] = useState([]);
     const [album, setAlbum] = useState([]);
+    const token = useContext(AppContext);
     let { albumId } = useParams();
 
     useEffect(() => {
@@ -42,7 +43,7 @@ export default function Tracks({ token, play, playerDevice, logout }) {
             })
             .then((response) => setAlbum(response.data));
     }, []);
-
+    console.log(album);
     return (
         <div className="section">
             <div
@@ -54,25 +55,41 @@ export default function Tracks({ token, play, playerDevice, logout }) {
                 }}
             >
                 <div className="tracks">
-                    <h2
+                    <div
                         style={{
-                            width: '80%',
+                            height: '100%',
+                            display: 'flex',
+                            flexDirection: 'column',
+                            justifyContent: 'center',
+                            alignItems: 'flex-start',
                             marginLeft: '10%',
-                            wordWrap: 'break-word',
                         }}
                     >
-                        {album.length === 0 ? (
-                            <div style={{ margin: 'auto' }}></div>
-                        ) : (
-                            <div>
-                                {album.name} ({album.artists[0].name})
-                            </div>
-                        )}
-                    </h2>
+                        <h2
+                            style={{
+                                width: '80%',
+                                wordWrap: 'break-word',
+                            }}
+                        >
+                            {album.length === 0 ? (
+                                <div style={{ margin: 'auto' }}></div>
+                            ) : (
+                                <div>
+                                    {album.name} ({album.artists[0].name})
+                                </div>
+                            )}
+                        </h2>
+                        <span
+                            className="play"
+                            onClick={() => play(album.uri, playerDevice)}
+                        >
+                            <RiPlayCircleFill />
+                        </span>
+                    </div>
                     {album.length === 0 ? (
-                        <div style={{ maring: 'auto' }}>Waiting</div>
+                        <div className="track">Waiting</div>
                     ) : (
-                        <div>
+                        <div className="cover-image">
                             <img src={album.images[0].url} />
                         </div>
                     )}
@@ -92,7 +109,7 @@ export default function Tracks({ token, play, playerDevice, logout }) {
                                   <div
                                       className="artist-played"
                                       style={{
-                                          width: '82%',
+                                          width: '80%',
                                           margin: '0 auto',
                                       }}
                                   >

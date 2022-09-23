@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
 /* eslint-disable indent */
-import React, { useEffect, useState } from 'react';
+import React, { createContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import Menu from './components/Header';
 import Player from './components/Player';
@@ -12,8 +12,10 @@ import Tracks from './components/Tracks';
 import Login from './components/Login';
 import Aside from './components/Aside';
 import Error from './Error';
-import { Routes, Route, Link } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import SearchForm from './components/SearchForm';
+
+export const AppContext = createContext();
 
 export default function App() {
     const clientID = 'af6fe4b7a75e4651bd1531de3f541e53';
@@ -120,122 +122,114 @@ export default function App() {
             setUrl(url, playerDevice === undefined);
         }
     }
-    const toLog = (
-        <Link to="/login" style={{ textDecoration: 'none' }}>
-            <Login handleClick={handleClick} />
-        </Link>
-    );
+    const toLog = <Login handleClick={handleClick} />;
 
     return (
-        <div className="container">
-            {!token ? (
-                <div
-                    style={{
-                        margin: 'auto',
-                    }}
-                >
-                    {toLog}
-                </div>
-            ) : (
-                <React.Fragment>
-                    <Menu logout={logout} profile={profile} />
-                    <div style={{ display: 'flex', flexDirection: 'column' }}>
-                        <div className="section">
-                            <Routes>
-                                <Route
-                                    path="/search"
-                                    element={
-                                        <SearchForm
-                                            token={token}
-                                            setUrl={setUrl}
-                                            play={play}
-                                            playerDevice={playerDevice}
-                                        />
-                                    }
-                                />
-                                <Route
-                                    exact
-                                    path="/"
-                                    element={
-                                        <Home
-                                            token={token}
-                                            setUrl={setUrl}
-                                            playerDevice={playerDevice}
-                                            play={play}
-                                        />
-                                    }
-                                />
-                                <Route
-                                    path="/Library"
-                                    element={
-                                        <Library
-                                            token={token}
-                                            setUrl={setUrl}
-                                            play={play}
-                                            playerDevice={playerDevice}
-                                        />
-                                    }
-                                />
-                                <Route
-                                    path="/Playlists"
-                                    element={
-                                        <Playlists
-                                            token={token}
-                                            setUrl={setUrl}
-                                            play={play}
-                                            playerDevice={playerDevice}
-                                            setTotalPlaylistTracks={
-                                                setTotalPlaylistTracks
-                                            }
-                                        />
-                                    }
-                                />
-                                <Route
-                                    path="/Albums/:artistId"
-                                    element={
-                                        <Albums
-                                            token={token}
-                                            artistsAlbums={artistsAlbums}
-                                            getArtistsAlbums={getArtistsAlbums}
-                                        />
-                                    }
-                                />
-                                <Route
-                                    path="/Tracks/:albumId"
-                                    element={
-                                        <Tracks
-                                            token={token}
-                                            setUrl={setUrl}
-                                            play={play}
-                                            playerDevice={playerDevice}
-                                            artistsAlbums={artistsAlbums}
-                                        />
-                                    }
-                                />
-
-                                <Route
-                                    path="/login"
-                                    element={
-                                        <Login handleClick={handleClick} />
-                                    }
-                                />
-
-                                <Route path="/*" element={<Error />} />
-                            </Routes>
-                        </div>
-                        <Player
-                            token={token}
-                            url={url}
-                            playerDevice={playerDevice}
-                        />
+        <AppContext.Provider value={token}>
+            <div className="container">
+                {!token ? (
+                    <div
+                        style={{
+                            margin: 'auto',
+                        }}
+                    >
+                        {toLog}
                     </div>
-                    <Aside
-                        totalPlaylistTracks={totalPlaylistTracks}
-                        profile={profile}
-                        logout={logout}
-                    />
-                </React.Fragment>
-            )}
-        </div>
+                ) : (
+                    <React.Fragment>
+                        <Menu logout={logout} profile={profile} />
+                        <div
+                            style={{ display: 'flex', flexDirection: 'column' }}
+                        >
+                            <div className="section">
+                                <Routes>
+                                    <Route
+                                        path="/search"
+                                        element={
+                                            <SearchForm
+                                                setUrl={setUrl}
+                                                play={play}
+                                                playerDevice={playerDevice}
+                                            />
+                                        }
+                                    />
+                                    <Route
+                                        exact
+                                        path="/"
+                                        element={
+                                            <Home
+                                                setUrl={setUrl}
+                                                playerDevice={playerDevice}
+                                                play={play}
+                                            />
+                                        }
+                                    />
+                                    <Route
+                                        path="/Library"
+                                        element={
+                                            <Library
+                                                setUrl={setUrl}
+                                                play={play}
+                                                playerDevice={playerDevice}
+                                            />
+                                        }
+                                    />
+                                    <Route
+                                        path="/Playlists"
+                                        element={
+                                            <Playlists
+                                                setUrl={setUrl}
+                                                play={play}
+                                                playerDevice={playerDevice}
+                                                setTotalPlaylistTracks={
+                                                    setTotalPlaylistTracks
+                                                }
+                                            />
+                                        }
+                                    />
+                                    <Route
+                                        path="/Albums/:artistId"
+                                        element={
+                                            <Albums
+                                                artistsAlbums={artistsAlbums}
+                                                getArtistsAlbums={
+                                                    getArtistsAlbums
+                                                }
+                                            />
+                                        }
+                                    />
+                                    <Route
+                                        path="/Tracks/:albumId"
+                                        element={
+                                            <Tracks
+                                                setUrl={setUrl}
+                                                play={play}
+                                                playerDevice={playerDevice}
+                                                artistsAlbums={artistsAlbums}
+                                            />
+                                        }
+                                    />
+
+                                    <Route
+                                        path="/login"
+                                        element={
+                                            <Login handleClick={handleClick} />
+                                        }
+                                    />
+
+                                    <Route path="/*" element={<Error />} />
+                                </Routes>
+                            </div>
+                            <Player url={url} playerDevice={playerDevice} />
+                        </div>
+                        <Aside
+                            totalPlaylistTracks={totalPlaylistTracks}
+                            profile={profile}
+                            logout={logout}
+                        />
+                    </React.Fragment>
+                )}
+            </div>
+        </AppContext.Provider>
     );
 }

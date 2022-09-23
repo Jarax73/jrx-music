@@ -1,18 +1,13 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import { AppContext } from '../App';
 
-export default function Albums({
-    token,
-    artistsAlbums,
-    getArtistsAlbums,
-    logout,
-}) {
+export default function Albums({ artistsAlbums, getArtistsAlbums, logout }) {
     Albums.propTypes = {
         id: PropTypes.string,
-        token: PropTypes.string,
         artistsAlbums: PropTypes.array,
         getArtistsAlbums: PropTypes.func,
         logout: PropTypes.func,
@@ -20,6 +15,7 @@ export default function Albums({
 
     const [artist, setArtist] = useState([]);
     let { artistId } = useParams();
+    const token = useContext(AppContext);
 
     useEffect(() => {
         axios
@@ -44,7 +40,7 @@ export default function Albums({
             })
             .then((response) => setArtist(response.data));
     }, []);
-
+    console.log(artistsAlbums);
     return (
         <div className="section">
             <h2>
